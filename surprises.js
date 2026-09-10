@@ -49,7 +49,7 @@ function evDisco(){
 function evSeaLions(){
   banner('SEA LION INVASION', 'ork ork ork ork ork', '#22E7FF');
   const lions = [];
-  for(let i=0;i<7;i++){
+  for(let i=0;i<4;i++){
     const im = document.createElement('img');
     im.className = 'surLion';
     im.src = A.sealiongif || '';
@@ -105,6 +105,11 @@ function evAngryWheel(){
   idleSpin = false;
   const t0 = performance.now();
   const iv = setInterval(function(){
+    if(spinning){                       /* a spin started - get out of its way */
+      clearInterval(iv);
+      end(function(){ idleSpin = old; document.getElementById('redveil').style.opacity = 0; });
+      return;
+    }
     rot -= .09;
     if(Math.random()<.3) Snd.clack(.8);
     if(performance.now()-t0 > 5200){
@@ -221,6 +226,7 @@ function inGauntlet(){
 function next(){
   if(busy) return false;
   if(!Snd.ctx) return false;
+  if(typeof spinning !== 'undefined' && spinning) return false;   /* never mid-spin */
   if(typeof MG !== 'undefined' && MG.inGame && MG.inGame()) return false;  /* never mid-game */
   if(!queue.length) reshuffle();
 
@@ -251,6 +257,20 @@ function flush(){
   })();
 }
 function remaining(){ return queue.length; }
+
+const NAMES = ['Upside down','Disco','Sea lions','Fake crash','Berry rain',
+               'Gravity','Angry wheel','Tiny wheel','Fake chat','Delivery','Slots'];
+function list(){ return NAMES.slice(); }
+function play(i){
+  const ev = EVENTS[i];
+  if(!ev || busy) return false;
+  if(typeof spinning !== 'undefined' && spinning) return false;
+  if(typeof MG !== 'undefined' && MG.inGame && MG.inGame()) return false;
+  const qi = queue.indexOf(ev); if(qi >= 0) queue.splice(qi,1);
+  busy = true;
+  try { ev(); } catch(e){ console.error('surprise failed', e); end(); }
+  return true;
+}
 
 /* ---------- DOUBLE OR NOTHING (operator troll, key V) ---------- */
 function doubleOrNothing(){
@@ -303,7 +323,7 @@ setInterval(tick, 1000);
 
 return {
   fire:fire, next:next, flush:flush, remaining:remaining,
-  doubleOrNothing:doubleOrNothing,
+  list:list, play:play,
   busy:function(){ return busy; }
 };
 })();

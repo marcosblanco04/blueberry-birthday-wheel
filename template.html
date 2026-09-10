@@ -142,7 +142,16 @@ footer{width:100%;display:flex;align-items:center;justify-content:center;gap:cla
 #winName{font-weight:900;font-size:clamp(16px,2.2vw,30px);line-height:1.1;margin:2px 0 4px;
   text-shadow:0 0 26px rgba(255,63,208,.7)}
 #winSub{font-weight:800;letter-spacing:2.4px;font-size:clamp(9px,1.05vw,13px);text-transform:uppercase;color:var(--cyan);opacity:.95}
-#seaLionBox,#yippeeBox{display:none;flex:0 0 auto}
+#seaLionBox,#yippeeBox,#winSecretBox{display:none;flex:0 0 auto}
+#winSecretBox{max-width:min(560px,88vw);padding:14px 18px;border-radius:20px;
+  border:3px dashed rgba(255,212,71,.8);background:rgba(255,212,71,.09);text-align:center}
+#winSecretBox .lock{font-size:clamp(34px,5vw,60px);animation:pop 1.6s ease-in-out infinite}
+#winSecretBox .sr{font-family:'Bungee',cursive;font-size:clamp(14px,2.4vw,30px);line-height:1.05;margin-top:6px;
+  background:linear-gradient(92deg,#FFD447,#fff,#FF3FD0,#FFD447);background-size:300% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;animation:flow 3s linear infinite}
+#winSecretBox .sh{margin-top:9px;font-weight:700;font-size:clamp(10px,1.1vw,13.5px);line-height:1.6;
+  color:rgba(255,255,255,.75);font-style:italic}
+#winSecretBox .sc{margin-top:8px;font-family:'Bungee',cursive;font-size:clamp(12px,1.6vw,20px);color:#22E7FF}
 #yippeeBox img{height:clamp(150px,24vh,260px);border-radius:18px;
   box-shadow:0 0 50px rgba(255,212,71,.9);animation:wob .4s ease-in-out infinite}
 #yipText{font-family:'Bungee',cursive;font-size:clamp(16px,2.6vw,36px);color:var(--gold);
@@ -229,6 +238,7 @@ body.chaos #dim{animation:chaosDim .35s steps(2) infinite}
 #introText.hit{animation:flow 2.4s linear infinite, slam .42s cubic-bezier(.2,1.8,.35,1)}
 @keyframes slam{0%{transform:scale(2.4) rotate(-6deg);opacity:0}60%{transform:scale(.93) rotate(1.5deg);opacity:1}100%{transform:scale(1) rotate(0)}}
 
+#sumOv{z-index:78}   /* the finale card stays on top of the surprise layer */
 #sumCard{position:relative;text-align:center;max-width:min(1100px,95vw);max-height:94vh;overflow:auto;
   padding:clamp(18px,2.6vw,34px);border-radius:32px;border:5px solid transparent;
   transform:scale(.6);transition:.6s cubic-bezier(.15,1.7,.4,1);
@@ -249,7 +259,24 @@ body.chaos #dim{animation:chaosDim .35s steps(2) infinite}
   border-radius:18px;padding:10px 8px;box-shadow:0 0 22px rgba(255,212,71,.25)}
 .sumItem img{width:100%;height:clamp(80px,10vh,110px);object-fit:contain;background:#fff;
   border-radius:12px;padding:5px}
+.sumItem.secret{border-style:dashed;background:rgba(255,212,71,.12)}
+.sumItem .pad{height:clamp(80px,10vh,110px);display:grid;place-items:center;
+  font-size:clamp(34px,5vw,54px);background:rgba(255,255,255,.06);border-radius:12px}
+.sumItem .t span{font-weight:700;font-size:.85em;opacity:.7;font-style:italic}
 .sumItem .t{margin-top:7px;font-weight:900;font-size:clamp(9px,.95vw,12.5px);line-height:1.2}
+#sumSecret{margin:18px auto 0;max-width:min(680px,92vw);padding:16px 20px;border-radius:22px;
+  border:3px dashed rgba(255,212,71,.75);background:rgba(255,212,71,.08);
+  box-shadow:0 0 40px rgba(255,212,71,.25) inset}
+#sumSecret .lock{font-size:clamp(26px,4vw,44px);animation:pop 2.2s ease-in-out infinite}
+#sumSecret .st{font-family:'Bungee',cursive;font-size:clamp(11px,1.5vw,18px);letter-spacing:2px;
+  color:#FFD447;margin-top:4px}
+#sumSecret .sr{font-family:'Bungee',cursive;font-size:clamp(16px,2.8vw,36px);line-height:1.05;margin-top:6px;
+  background:linear-gradient(92deg,#FFD447,#fff,#FF3FD0,#FFD447);background-size:300% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;animation:flow 3s linear infinite}
+#sumSecret .sh{margin-top:10px;font-weight:700;font-size:clamp(10px,1.15vw,14px);line-height:1.65;
+  color:rgba(255,255,255,.72);font-style:italic}
+#sumSecret .sc{margin-top:10px;font-family:'Bungee',cursive;font-size:clamp(12px,1.8vw,22px);color:#22E7FF;
+  letter-spacing:1px}
 #sumFoot{margin-top:16px;font-weight:800;font-size:clamp(11px,1.3vw,17px);color:#ffe9a8}
 
 #lostCard{position:relative;text-align:center;transform:scale(.6);transition:.5s cubic-bezier(.15,1.7,.4,1);
@@ -383,6 +410,81 @@ body.sur-disco{animation:surDisco .55s steps(3) infinite}
   animation:pop .5s ease-in-out infinite}
 .surDonIn .row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
 
+/* ---------- double or nothing ---------- */
+#donCard{position:relative;text-align:center;max-width:min(760px,94vw);
+  padding:clamp(20px,3vw,42px) clamp(24px,4vw,56px);border-radius:30px;border:5px solid transparent;
+  transform:scale(.6);transition:.5s cubic-bezier(.15,1.7,.4,1);
+  background:linear-gradient(160deg,#3a0512,#160207) padding-box,
+             conic-gradient(from 0deg,#ff3355,#FFD447,#ff3355) border-box;
+  animation:cardGlow .9s ease-in-out infinite}
+.ov.on #donCard{transform:scale(1)}
+#donCard .t{font-family:'Bungee',cursive;font-size:clamp(22px,4.4vw,58px);line-height:1;color:#ff5b7a;
+  text-shadow:0 0 34px rgba(255,51,85,.9)}
+#donCard .s{margin-top:12px;font-weight:800;font-size:clamp(11px,1.35vw,17px);line-height:1.6;
+  color:rgba(255,255,255,.85)}
+#donCard .s b{color:#FFD447}
+#donCard .row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+#donCard .hintline{margin-top:10px;font-size:11px;font-weight:800;letter-spacing:2px;
+  text-transform:uppercase;color:rgba(255,255,255,.4)}
+.oddsbar{margin:16px auto 0;width:min(520px,80vw);height:20px;border-radius:999px;overflow:hidden;
+  background:#ff3355;border:2px solid rgba(255,255,255,.25);position:relative}
+.oddsbar .r5{position:absolute;left:0;top:0;bottom:0;width:5%;background:#9DFF3C}
+#donRoll{display:none}
+#donTrack{position:relative;margin:18px auto;width:min(620px,86vw);height:46px;border-radius:12px;
+  background:repeating-linear-gradient(90deg,#5c0d1e 0 18px,#4a0a18 18px 36px);
+  border:3px solid rgba(255,255,255,.25);overflow:hidden}
+#donGreen{position:absolute;top:0;bottom:0;background:linear-gradient(#c6ff6a,#4fbf00);
+  box-shadow:0 0 24px rgba(157,255,60,.9)}
+#donNeedle{position:absolute;top:-6px;bottom:-6px;width:6px;margin-left:-3px;border-radius:3px;
+  background:#fff;box-shadow:0 0 18px #fff,0 0 40px #22E7FF}
+
+/* ---------- the Celsius fight ---------- */
+#celsiusCard{position:relative;text-align:center;max-width:min(720px,94vw);
+  padding:clamp(20px,3vw,42px) clamp(24px,4vw,56px);border-radius:30px;border:5px solid transparent;
+  transform:scale(.6);transition:.5s cubic-bezier(.15,1.7,.4,1);
+  background:linear-gradient(160deg,#4a2410,#1c0c05) padding-box,
+             conic-gradient(from 0deg,#ffb36b,#FFD447,#ff7a3d,#ffb36b) border-box;
+  animation:cardGlow 1.3s ease-in-out infinite}
+.ov.on #celsiusCard{transform:scale(1)}
+#celsiusCard .peach{font-size:clamp(40px,7vw,86px);animation:pop 1.4s ease-in-out infinite}
+#celsiusCard .t{font-family:'Bungee',cursive;font-size:clamp(20px,4vw,52px);line-height:1;color:#FFD447;
+  text-shadow:0 0 30px rgba(255,212,71,.85);margin-top:4px}
+#celsiusCard .s{margin-top:12px;font-weight:800;font-size:clamp(11px,1.35vw,17px);line-height:1.6;
+  color:rgba(255,255,255,.85)}
+
+#mashOv{position:fixed;inset:0;z-index:69;display:none;place-items:end center;padding-bottom:6vh;
+  pointer-events:none;background:radial-gradient(circle at 50% 42%,transparent 34%,rgba(4,1,12,.72) 100%)}
+#mashOv.on{display:grid}
+#mashIn{pointer-events:auto;text-align:center;width:min(760px,94vw);padding:clamp(14px,2vw,26px);
+  border-radius:26px;background:rgba(8,2,24,.92);border:4px solid #FFD447;
+  box-shadow:0 0 60px rgba(255,212,71,.6)}
+#mashIn .t{font-family:'Bungee',cursive;font-size:clamp(18px,3vw,40px);color:#FFD447;line-height:1}
+#mashIn .s{margin-top:6px;font-weight:800;font-size:clamp(10px,1.2vw,15px);color:rgba(255,255,255,.75)}
+#mashBar{position:relative;margin:14px auto 8px;width:100%;height:34px;border-radius:999px;
+  background:rgba(255,255,255,.1);overflow:hidden;border:2px solid rgba(255,255,255,.2)}
+#mashFill{position:absolute;inset:0;transform:scaleX(0);transform-origin:left center;
+  background:linear-gradient(90deg,#22E7FF,#9DFF3C,#FFD447,#FF3FD0)}
+#mashMark{position:absolute;top:-4px;bottom:-4px;width:5px;margin-left:-2px;background:#fff;
+  box-shadow:0 0 16px #fff}
+#mashTime{font-family:'Bungee',cursive;font-size:clamp(14px,2vw,26px);color:#fff}
+
+/* ---------- admin ---------- */
+#adminOv{position:fixed;inset:0;z-index:95;display:none;background:rgba(2,0,8,.9);padding:16px;
+  overflow:auto}
+#adminOv.on{display:block}
+#adminIn{max-width:1100px;margin:0 auto;background:#0d0524;border:3px solid #8B3DFF;border-radius:18px;
+  padding:16px 18px 22px}
+#adminHead{font-family:'Bungee',cursive;font-size:15px;color:#FFD447;letter-spacing:1px;
+  padding-bottom:10px;border-bottom:2px solid rgba(255,255,255,.12);margin-bottom:12px}
+#adminHead span{font-family:'Outfit';font-weight:700;font-size:11.5px;color:rgba(255,255,255,.55);
+  letter-spacing:0}
+.adGroup h4{margin:14px 0 7px;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;
+  color:#22E7FF}
+.adRow{display:flex;flex-wrap:wrap;gap:7px}
+.adBtn{font-family:'Outfit';font-weight:800;font-size:12px;padding:8px 13px;border-radius:9px;
+  border:2px solid rgba(255,255,255,.18);background:rgba(255,255,255,.07);color:#fff;cursor:pointer}
+.adBtn:hover{background:rgba(255,212,71,.22);border-color:#FFD447}
+
 #help{position:fixed;left:16px;bottom:36px;z-index:80;max-width:400px;padding:16px 18px;border-radius:16px;
   background:rgba(8,3,26,.94);border:2px solid rgba(139,61,255,.6);font-size:12.5px;line-height:1.7;
   display:none;box-shadow:0 20px 60px rgba(0,0,0,.6)}
@@ -435,6 +537,14 @@ kbd{background:#2b1055;border:1px solid #5b2fa8;border-bottom-width:3px;border-r
     <div id="winRow">
       <div id="winImgWrap"><img id="winImg" alt=""></div>
       <div id="seaLionBox"><img id="seaLionGif" alt="sea lion"><div id="orkText">ORK ORK ORK!</div></div>
+      <div id="winSecretBox">
+        <div class="lock">&#128274;</div>
+        <div class="sr">REVEALED ON THE 12TH</div>
+        <div class="sh">Hint: it normally comes by the dozen &mdash; this is not a dozen.<br>
+          You will smell it before you see it, and it will not last the week.<br>
+          That is exactly the point.</div>
+        <div class="sc" id="winSecretCd"></div>
+      </div>
       <div id="yippeeBox"><img id="yippeeGif" alt="yippee"><div id="yipText">YIPPEE!!</div></div>
     </div>
     <div id="winName"></div>
@@ -468,6 +578,15 @@ kbd{background:#2b1055;border:1px solid #5b2fa8;border-bottom-width:3px;border-r
     <div id="sumLove">I LOVE YOU &#10084;&#65039;</div>
     <div id="sumSub">Everything you won tonight</div>
     <div id="sumGrid"></div>
+    <div id="sumSecret">
+      <div class="lock">&#128274;</div>
+      <div class="st">AND ONE MORE. A SECRET ONE.</div>
+      <div class="sr">REVEALED ON THE 12TH</div>
+      <div class="sh">Hint: it normally comes by the dozen &mdash; this is not a dozen.<br>
+        You will smell it before you see it, and it will not last the week.<br>
+        That is exactly the point.</div>
+      <div class="sc" id="secretCountdown"></div>
+    </div>
     <div id="sumFoot">Every single one of them is getting bought. Happy birthday, my love. &#129744;</div>
   </div>
 </div>
@@ -491,6 +610,60 @@ kbd{background:#2b1055;border:1px solid #5b2fa8;border-bottom-width:3px;border-r
     <div id="mgCardSub"></div>
     <div id="mgCardRule"></div>
     <button class="btn" id="mgCardBtn">START</button>
+  </div>
+</div>
+
+<div class="ov" id="donOv">
+  <div id="donCard">
+    <div id="donOffer">
+      <div class="t">DOUBLE OR NOTHING</div>
+      <div class="s">Two spins is all you get.<br>
+        Unless you gamble them. <b>5%</b> chance of two more.
+        <b>95%</b> chance you walk away with what you have.</div>
+      <div class="oddsbar"><div class="r5"></div></div>
+      <div class="row">
+        <button class="btn" id="donYes">YES &mdash; RISK IT</button>
+        <button class="btn pinky" id="donNo">NO, I'LL KEEP IT</button>
+      </div>
+    </div>
+    <div id="donRoll">
+      <div class="t">HIT THE 5%</div>
+      <div class="s" id="donOdds">YOUR ODDS: 5%</div>
+      <div id="donTrack">
+        <div id="donGreen"></div>
+        <div id="donNeedle"></div>
+      </div>
+      <div class="s" id="donResult"></div>
+      <button class="btn" id="donStop">STOP IT</button>
+      <div class="hintline">SPACE or click</div>
+    </div>
+  </div>
+</div>
+
+<div class="ov" id="celsiusOv">
+  <div id="celsiusCard">
+    <div class="peach">&#127825;</div>
+    <div class="t" id="celsiusTag">ONE LAST THING</div>
+    <div class="s" id="celsiusSub">There is a 24-pack of Peach Vibe still on that wheel.
+      But the wheel has seized up. You are going to have to force it.</div>
+    <button class="btn" id="celsiusBtn">GRAB THE WHEEL</button>
+  </div>
+</div>
+
+<div id="mashOv">
+  <div id="mashIn">
+    <div class="t">BREAK IT LOOSE</div>
+    <div class="s" id="mashNote"></div>
+    <div id="mashBar"><div id="mashFill"></div><div id="mashMark"></div></div>
+    <div id="mashTime">12.0s</div>
+    <button class="btn" id="mashBtn">MASH  (or SPACE)</button>
+  </div>
+</div>
+
+<div id="adminOv">
+  <div id="adminIn">
+    <div id="adminHead">ADMIN &mdash; hidden from stream &nbsp;<span id="adminState"></span></div>
+    <div id="adminBody"></div>
   </div>
 </div>
 
@@ -526,9 +699,12 @@ kbd{background:#2b1055;border:1px solid #5b2fa8;border-bottom-width:3px;border-r
   <kbd>F</kbd> fullscreen &nbsp; <kbd>C</kbd> confetti test &nbsp; <kbd>H</kbd> hide this<br>
   <kbd>X</kbd> next surprise (<b id="surLeft">11</b> left) &nbsp; <kbd>V</kbd> double-or-nothing &nbsp;
   <kbd>B</kbd> fake-out: auto/always/never<br>
-  <span style="opacity:.6;font-size:11.5px">Flow: spin 1 FAIL &rarr; spin 2 FAIL &rarr; YOU LOST EVERYTHING
-  &rarr; 5-game gauntlet (~10 min, unlimited retries, always winnable) &rarr; +2 spins,
-  each a RANDOM pick from the 5 remaining prizes. Operator only &mdash; keep hidden on stream.</span>
+  <kbd>&sect;</kbd> or <kbd>`</kbd> ADMIN PANEL (jump anywhere, no replaying)<br>
+  <span style="opacity:.6;font-size:11.5px">Flow: FAIL &rarr; FAIL &rarr; YOU LOST EVERYTHING &rarr; 5-game
+  gauntlet &rarr; +2 spins (random prize each) &rarr; DOUBLE OR NOTHING (the NO button runs away)
+  &rarr; she hits the 5% &rarr; +2 spins: the last prize, then the SECRET PRIZE
+  &rarr; Celsius mash fight &rarr; finale. Pool: Headband, Wig, Dispatch.
+  Operator only &mdash; keep hidden on stream.</span>
 </div>
 
 <script>
@@ -560,19 +736,20 @@ const ITEMS = [
  {k:'celsius48',n:'48 x Celsius Peachy Vibe',          s:'48x\nCELSIUS'},
  {k:'FAIL',     n:'TRY AGAIN',                         s:'TRY\nAGAIN', fail:1},
  {k:'wig',      n:'Zero Two Cosplay Wig',              s:'ZERO TWO\nWIG',      win:1, url:'https://throne.com/blueberryvibezz/item/6c1ffb36-3808-48f5-abfe-f7f42c8afcb0'},
- {k:'EXTRA',    n:'SECRET EXTRA SPIN',                 s:'EXTRA\nSPIN', extra:1},
+ {k:'SECRET',   n:'SECRET PRIZE',                      s:'SECRET\nPRIZE', secret:1},
  {k:'gow',      n:'God of War',                        s:'GOD OF\nWAR'},
  {k:'rabbit',   n:'Goth Rabbit Spa Headband',          s:'SPA\nHEADBAND',      win:1, url:'https://throne.com/blueberryvibezz/item/20bf1901-a99f-467a-bf4a-ef874132cefa'},
  {k:'tender',   n:'Tender Hearted Bangle Set',         s:'TENDER\nBANGLES'},
  {k:'hexa',     n:'Govee Glide Hexa Panels',           s:'HEXA\nPANELS'},
  {k:'enderman', n:'The Enderman Ushanka',              s:'ENDERMAN\nUSHANKA'},
  {k:'leon',     n:'Leon S. Kennedy Figure',            s:'LEON\nFIGURE'},
- {k:'horns',    n:'3D Printed Headset Horns',          s:'HEADSET\nHORNS',     win:1, url:'https://throne.com/blueberryvibezz/item/c3966aea-c58b-44ab-9d06-c77cbf720e1d'},
+ {k:'horns',    n:'3D Printed Headset Horns',          s:'HEADSET\nHORNS'},
  {k:'dispatch', n:'Dispatch',                          s:'DISPATCH',           win:1, url:'https://throne.com/blueberryvibezz/item/86e34c64-16ea-4d2a-b1b8-15004a46c52f'},
  {k:'nurse',    n:'Bubble Head Nurse Figure',          s:'BUBBLE\nNURSE'},
- {k:'celsius24',n:'24 x Celsius Peach Vibe',           s:'24x\nCELSIUS',       win:1, url:'https://throne.com/blueberryvibezz/item/8716d1b1-08cf-4462-bf81-f1d5a1b53df6'},
+ {k:'celsius24',n:'24 x Celsius Peach Vibe',           s:'24x\nCELSIUS',       final:1, url:'https://throne.com/blueberryvibezz/item/8716d1b1-08cf-4462-bf81-f1d5a1b53df6'},
 ];
 const PRIZE_SPINS = 2;      /* spins earned back from the gauntlet */
+const DON_SPINS   = 2;      /* spins from the double-or-nothing gamble */
 const LOSS_SPINS  = 2;      /* spins she loses at the start */
 const N = ITEMS.length, SEG = (Math.PI*2)/N;
 const idxOf = k => ITEMS.findIndex(i=>i.k===k);
@@ -872,7 +1049,7 @@ function buildWheelSprite(){
     const it=ITEMS[i], a0=i*SEG-Math.PI/2-SEG/2, a1=a0+SEG;
     const grad=ctx.createRadialGradient(0,0,R*.12,0,0,R);
     if(it.fail){ grad.addColorStop(0,'#2b0008'); grad.addColorStop(.6,'#7a001c'); grad.addColorStop(1,'#12000a'); }
-    else if(it.extra){ grad.addColorStop(0,'#fffbe6'); grad.addColorStop(.35,'#FFD447'); grad.addColorStop(1,'#a35c00'); }
+    else if(it.secret){ grad.addColorStop(0,'#fffbe6'); grad.addColorStop(.35,'#FFD447'); grad.addColorStop(1,'#a35c00'); }
     else { const c=PAL[i%PAL.length];
       grad.addColorStop(0,c[0]); grad.addColorStop(1,c[1]); }
     ctx.beginPath(); ctx.moveTo(0,0); ctx.arc(0,0,R-6,a0,a1); ctx.closePath();
@@ -905,10 +1082,10 @@ function buildWheelSprite(){
       ctx.translate(ix,0); ctx.rotate(Math.PI/2);
       ctx.drawImage(im,-w/2,-h/2,w,h);
       ctx.restore();
-    } else if(it.fail || it.extra){
+    } else if(it.fail || it.secret){
       ctx.save(); ctx.translate(ix,0); ctx.rotate(Math.PI/2);
       ctx.font=(R*.15)+'px serif'; ctx.textAlign='center'; ctx.textBaseline='middle';
-      ctx.fillText(it.fail?'💀':'⭐',0,0); ctx.restore();
+      ctx.fillText(it.fail?'💀':'🔒',0,0); ctx.restore();
     }
 
     const lines = owned ? ['ALREADY','WON'] : it.s.split('\n');
@@ -916,8 +1093,8 @@ function buildWheelSprite(){
     const fs=R*(lines.length>1?.042:.05);
     ctx.font='900 '+fs+'px Outfit, system-ui, sans-serif';
     ctx.lineWidth=fs*.36; ctx.lineJoin='round';
-    ctx.strokeStyle= it.extra?'rgba(255,255,255,.85)':'rgba(0,0,0,.62)';
-    ctx.fillStyle= it.fail?'#ffd2da' : (it.extra?'#3a1f00':(owned?'#ff5b7a':'#ffffff'));
+    ctx.strokeStyle= it.secret?'rgba(255,255,255,.85)':'rgba(0,0,0,.62)';
+    ctx.fillStyle= it.fail?'#ffd2da' : (it.secret?'#3a1f00':(owned?'#ff5b7a':'#ffffff'));
     const lx=R*.63;
     lines.forEach(function(ln,li){
       const y=(li-(lines.length-1)/2)*fs*1.02;
@@ -1052,7 +1229,13 @@ function cannons(){
   burst(innerWidth, innerHeight, 80, {dir:-Math.PI/1.55, spread:.85, speed:26, g:.3, lift:6});
   Snd.noise(.35,180,.7,.3,'lowpass'); Snd.tone(60,.4,.33,'sine',undefined,25);
 }
+let fxDirty=false;
 function drawP(dt){
+  if(!P.length){
+    if(fxDirty){ fctx.setTransform(1,0,0,1,0,0); fctx.clearRect(0,0,fx.width,fx.height); fxDirty=false; }
+    return;
+  }
+  fxDirty=true;
   fctx.setTransform(DPR,0,0,DPR,0,0); fctx.clearRect(0,0,innerWidth,innerHeight);
   const k=dt*60;
   for(let i=P.length-1;i>=0;i--){
@@ -1113,12 +1296,16 @@ function shake(){ const s=document.getElementById('stage');
 /* ============================================================
    5. MAIN LOOP
    ============================================================ */
-let rot=0, spinning=false, idleSpin=true, lastTickSeg=0, last=performance.now();
+let rot=0, spinning=false, idleSpin=true, lastTickSeg=0, wheelAcc=0, last=performance.now();
 function loop(now){
   const dt=Math.min((now-last)/1000,.05); last=now;
   if(dt>0) fpsAvg = fpsAvg*.94 + (1/dt)*.06;
   if(!spinning && idleSpin) rot += dt*.16;
-  if(!document.body.classList.contains('mg-open')){ drawWheel(rot); drawBulbs(dt); }
+  if(!document.body.classList.contains('mg-open')){
+    wheelAcc += dt;
+    if(spinning || wheelAcc >= 1/30){ wheelAcc = 0; drawWheel(rot); }
+    drawBulbs(dt);
+  }
   drawP(dt); drawRays(dt);
   requestAnimationFrame(loop);
 }
@@ -1142,8 +1329,9 @@ function pickOutcome(){
   if(override){ const k=override; override=null; return k; }
   if(phase==='losses') return 'FAIL';
   const pool = prizePool();
-  if(!pool.length) return 'FAIL';
-  return pool[(Math.random()*pool.length)|0].k;
+  if(pool.length) return pool[(Math.random()*pool.length)|0].k;
+  if(WON.indexOf('SECRET') < 0) return 'SECRET';   /* the last thing on the wheel */
+  return 'FAIL';
 }
 
 function targetRotationFor(index, turns, jitterScale){
@@ -1206,13 +1394,14 @@ function pickDecoy(targetIdx){
   if(fakeOutForced === false) return null;
   const lastLoss  = (phase==='losses'   && spinsTaken === LOSS_SPINS-1);
   const lastPrize = (phase==='comeback' && spinsTaken+1 >= spinsAllowed);
-  const force = (fakeOutForced === true) || lastLoss || lastPrize;
+  const secret    = !!(ITEMS[targetIdx] && ITEMS[targetIdx].secret);
+  const force = (fakeOutForced === true) || lastLoss || lastPrize || secret;
   if(!force && Math.random() > FAKEOUT_CHANCE) return null;
 
   let pick = null;
   [2,3,4].forEach(function(k){
     const i = (targetIdx + k) % N, it = ITEMS[i];
-    if(it.fail || it.extra || it.alreadyWon) return;
+    if(it.fail || it.secret || it.alreadyWon) return;
     if(!pick) pick = {idx:i, item:it};
     else if(BIG_LOOKING.indexOf(it.k) >= 0 && BIG_LOOKING.indexOf(pick.item.k) < 0) pick = {idx:i, item:it};
   });
@@ -1270,7 +1459,6 @@ function land(item){
   spinning=false; wrap.classList.remove('zoom');
   Snd.clack(1.6);
   if(item.fail) doFail();
-  else if(item.extra) doExtra();
   else doWin(item);
 }
 
@@ -1298,7 +1486,7 @@ function chaos(sec){
 }
 
 function doWin(item){
-  const isFinal = (spinsTaken+1 >= spinsAllowed);
+  const isFinal = !!item.final;
   winMode=true; state='awaitGift';
   shake(); flashScreen(1);
   document.getElementById('rays').classList.add('on');
@@ -1312,8 +1500,13 @@ function doWin(item){
   setTimeout(function(){ burst(innerWidth/2,innerHeight*.98,90,{dir:-Math.PI/2,spread:2.1,speed:24,g:.34,lift:5,coin:.45,emoji:.2}); },150);
 
   const isSeaLion = item.k==='sealion';
+  const isSecret  = !!item.secret;
+  document.getElementById('winImgWrap').style.display = isSecret ? 'none' : 'grid';
+  document.getElementById('winSecretBox').style.display = isSecret ? 'block' : 'none';
+  document.querySelector('#winCard .linkline').style.display = isSecret ? 'none' : 'block';
+  if(isSecret) startSecretCountdown('winSecretCd');
   document.getElementById('winImg').src = A[item.k]||'';
-  document.getElementById('winName').textContent = item.n;
+  document.getElementById('winName').textContent = isSecret ? '? ? ? ? ?' : item.n;
   const lk=document.getElementById('winLink');
   lk.href = item.url||'#'; lk.textContent = item.url||'';
   const box=document.getElementById('seaLionBox');
@@ -1334,6 +1527,8 @@ function doWin(item){
     setTimeout(function(){Snd.seaLionSong();}, 7200);
     document.getElementById('winTag').textContent='ORK ORK!! YOU WON!!';
     setTimeout(function(){ burst(innerWidth*.5,innerHeight*.98,80,{dir:-Math.PI/2,spread:2.2,speed:22,g:.3,hue:180,emoji:.05}); },900);
+  } else if(isSecret){
+    document.getElementById('winTag').textContent='THE SECRET PRIZE!!';
   } else if(isFinal){
     document.getElementById('winTag').textContent='MEGA JACKPOT!!!';
   } else {
@@ -1342,10 +1537,11 @@ function doWin(item){
   document.getElementById('winCard').classList.toggle('mega', isFinal);
   document.getElementById('winBtn').textContent = isFinal
     ? 'GIFT BOUGHT - SHOW THE FINALE'
-    : 'GIFT BOUGHT - NEXT SPIN';
-  document.getElementById('winSub').textContent = isFinal
-    ? 'SUPER PRIZE - THE BIGGEST DREAM ITEM ON THE WHOLE LIST'
-    : 'Real prize - getting bought right now';
+    : (isSecret ? 'SEALED - KEEP GOING' : 'GIFT BOUGHT - NEXT SPIN');
+  document.getElementById('winSub').textContent = isSecret
+    ? 'YOU WON SOMETHING YOU ARE NOT ALLOWED TO SEE YET'
+    : (isFinal ? 'SUPER PRIZE - THE BIGGEST DREAM ITEM ON THE WHOLE LIST'
+               : 'Real prize - getting bought right now');
   if(isFinal){
     chaos(20);
     Snd.jackpot(); setTimeout(function(){Snd.fanfare();},1500);
@@ -1397,7 +1593,7 @@ function extraAcknowledged(){
 
 function buildTracker(){
   let h='';
-  for(let i=0;i<PRIZE_SPINS;i++) h+='<div class="slot"><div class="qm">?</div>'+
+  for(let i=0;i<PRIZE_SPINS+DON_SPINS+1;i++) h+='<div class="slot"><div class="qm">?</div>'+
     '<div><div class="nm">MYSTERY PRIZE</div><div class="st">LOCKED</div></div></div>';
   document.getElementById('tracker').innerHTML=h;
 }
@@ -1407,15 +1603,21 @@ function markTracker(k){
   if(!el) return;
   buildWheelSprite();
   el.classList.add('won');
-  el.innerHTML='<img src="'+(A[k]||'')+'" alt=""><div><div class="nm">'+
-    ITEMS[idxOf(k)].n+'</div><div class="st">WON!</div></div>';
+  const it = ITEMS[idxOf(k)];
+  const thumb = (it && it.secret) ? '<div class="qm">&#128274;</div>'
+                                  : '<img src="'+(A[k]||'')+'" alt="">';
+  el.innerHTML = thumb + '<div><div class="nm">' +
+    ((it && it.secret) ? 'SECRET PRIZE' : it.n) + '</div><div class="st">WON!</div></div>';
 }
 function updCounter(){
   if(phase==='done'){ counter.textContent='ALL DONE'; return; }
   if(phase==='gauntlet'){ counter.textContent='GAUNTLET'; return; }
+  if(phase==='double'){ counter.textContent='DOUBLE OR NOTHING'; return; }
+  if(phase==='celsius'){ counter.textContent='FINAL PRIZE'; return; }
   if(phase==='comeback'){
-    const n = Math.min(PRIZE_SPINS, spinsTaken-comebackBase+1);
-    counter.textContent = 'COMEBACK ' + n + ' / ' + PRIZE_SPINS;
+    const cap = donDone ? DON_SPINS : PRIZE_SPINS;
+    const n = Math.min(cap, spinsTaken-comebackBase+1);
+    counter.textContent = (donDone ? 'BONUS ' : 'COMEBACK ') + n + ' / ' + cap;
     return;
   }
   counter.textContent = 'SPIN ' + (spinsTaken+1) + ' / ' + LOSS_SPINS;
@@ -1435,12 +1637,17 @@ function armNext(){
     showLostEverything();
     return;
   }
-  if(spinsTaken>=spinsAllowed){
+  if(celsiusDone){
     phase='done'; updCounter();
     state='done';
     hub.disabled=true; hub.classList.remove('waiting','ready');
     hub.textContent='THE\nEND';
     showFinale();
+    return;
+  }
+  if(spinsTaken>=spinsAllowed){
+    if(phase==='comeback' && !donDone){ startDoubleOrNothing(); return; }
+    startCelsiusIntro();
     return;
   }
   updCounter();
@@ -1490,9 +1697,16 @@ function showFinale(){
   let g='';
   WON.forEach(function(k){
     const it=ITEMS[idxOf(k)];
-    g+='<div class="sumItem"><img src="'+(A[k]||'')+'" alt=""><div class="t">'+it.n+'</div></div>';
+    if(!it) return;
+    if(it.secret){
+      g+='<div class="sumItem secret"><div class="pad">&#128274;</div>'+
+         '<div class="t">SECRET PRIZE<br><span>revealed on the 12th</span></div></div>';
+    } else {
+      g+='<div class="sumItem"><img src="'+(A[k]||'')+'" alt=""><div class="t">'+it.n+'</div></div>';
+    }
   });
   document.getElementById('sumGrid').innerHTML=g;
+  startSecretCountdown();
   document.getElementById('dim').classList.add('on');
   document.getElementById('rays').classList.add('on');
   winMode=true;
@@ -1502,6 +1716,34 @@ function showFinale(){
   cannons(); rainConfetti(160); fireworks(8);
   setTimeout(function(){ try{ SUR.flush(); }catch(e){} }, 6000);
   setTimeout(function(){ if(state==='done') document.getElementById('sumOv').classList.add('on'); },500);
+}
+
+/* ticks down to midnight on the next 12th, wherever the show happens to run */
+const secretTimers = {};
+function startSecretCountdown(id){
+  const el = document.getElementById(id || 'secretCountdown');
+  if(!el) return;
+  function target(){
+    const now = new Date();
+    let t = new Date(now.getFullYear(), now.getMonth(), 12, 0, 0, 0);
+    if(t <= now) t = new Date(now.getFullYear(), now.getMonth()+1, 12, 0, 0, 0);
+    return t;
+  }
+  const when = target();
+  function tick(){
+    const ms = when - new Date();
+    if(ms <= 0){ el.textContent = "IT IS THE 12TH \ud83d\udc9c"; return; }
+    const d = Math.floor(ms/86400000);
+    const h = Math.floor(ms/3600000) % 24;
+    const m = Math.floor(ms/60000) % 60;
+    const sec = Math.floor(ms/1000) % 60;
+    el.textContent = (d>0 ? d + 'd ' : '') +
+      String(h).padStart(2,'0') + ':' + String(m).padStart(2,'0') + ':' + String(sec).padStart(2,'0');
+  }
+  tick();
+  const key = id || 'secretCountdown';
+  if(secretTimers[key]) clearInterval(secretTimers[key]);
+  secretTimers[key] = setInterval(tick, 1000);
 }
 
 function giftConfirmed(){
@@ -1531,6 +1773,13 @@ document.getElementById('winBtn').addEventListener('click', giftConfirmed);
 document.getElementById('failBtn').addEventListener('click', failAcknowledged);
 document.getElementById('extraBtn').addEventListener('click', extraAcknowledged);
 document.getElementById('lostBtn').addEventListener('click', enterGauntlet);
+document.getElementById('donYes').addEventListener('click', donAccept);
+document.getElementById('donStop').onclick = donStop;
+document.getElementById('celsiusBtn').addEventListener('click', function(){
+  document.getElementById('celsiusOv').classList.remove('on');
+  document.getElementById('dim').classList.remove('on');
+  startMash();
+});
 
 const startEl=document.getElementById('start');
 let started=false;
@@ -1565,7 +1814,15 @@ function begin(){
 startEl.addEventListener('click', begin);
 
 addEventListener('keydown', function(e){
+  if(e.key === '`' || e.key === '\u00a7' || e.key === '~' || e.key === '\u00bd'){
+    e.preventDefault(); ADMIN.toggle(); return;
+  }
+  if(document.getElementById('adminOv').classList.contains('on')){
+    if(e.key === 'Escape'){ ADMIN.close(); }
+    return;
+  }
   if(MG.active()) return;
+  if(state === 'don' || state === 'donRoll' || state === 'mash') return;
   const k=e.key.toLowerCase();
   if(k===' '||e.code==='Space'){
     e.preventDefault();
@@ -1594,7 +1851,7 @@ addEventListener('keydown', function(e){
   if(k==='0') override='FAIL';
   if(k==='c'){ cannons(); rainConfetti(120); fireworks(3); }
   if(k==='x'){ SUR.fire(); }
-  if(k==='v'){ SUR.doubleOrNothing(); }
+  if(k==='v'){ startDoubleOrNothing(); }
   if(k==='b'){ fakeOutForced = (fakeOutForced===null) ? true : (fakeOutForced===true ? false : null); }
   if(k==='m'){ Snd.muted=!Snd.muted; }
   if(k==='h'){
