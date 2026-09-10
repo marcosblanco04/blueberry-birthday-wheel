@@ -657,6 +657,9 @@ function finish(){
 
 function open(){
   activeFlag=true;
+  /* make sure no surprise effect is left hanging over the games */
+  document.body.classList.remove('sur-flip','sur-disco');
+  try{ GRAV_MUL = 1; document.getElementById('surLayer').innerHTML=''; }catch(e){}
   stageIdx=0; fails={};
   ov.classList.add('on');
   document.body.classList.add('mg-open');
