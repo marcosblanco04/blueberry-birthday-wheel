@@ -251,49 +251,6 @@ body.chaos #dim{animation:chaosDim .35s steps(2) infinite}
 .sumItem .t{margin-top:7px;font-weight:900;font-size:clamp(9px,.95vw,12.5px);line-height:1.2}
 #sumFoot{margin-top:16px;font-weight:800;font-size:clamp(11px,1.3vw,17px);color:#ffe9a8}
 
-#lostCard{position:relative;text-align:center;transform:scale(.6);transition:.5s cubic-bezier(.15,1.7,.4,1);
-  padding:clamp(26px,4vw,54px) clamp(30px,5vw,70px);border-radius:34px;
-  background:radial-gradient(circle,rgba(30,0,10,.95) 0%,rgba(10,0,6,.9) 70%);
-  border:4px solid rgba(255,51,85,.7);box-shadow:0 0 90px rgba(255,0,60,.5)}
-.ov.on #lostCard{transform:scale(1)}
-#lostTag{font-family:'Bungee',cursive;font-size:clamp(30px,6.6vw,96px);line-height:.95;color:#ff3355;
-  text-shadow:0 0 40px rgba(255,51,85,.9),0 0 110px rgba(255,0,60,.6);animation:glitch .16s infinite}
-#lostSub{margin-top:14px;font-weight:900;letter-spacing:3px;text-transform:uppercase;
-  font-size:clamp(10px,1.4vw,18px);color:#ff9db0}
-#lostHope{margin-top:18px;font-weight:800;font-size:clamp(12px,1.7vw,22px);color:#FFD447;
-  animation:pop 1.8s ease-in-out infinite}
-
-#mgOv{position:fixed;inset:0;z-index:86;display:none;align-content:center;justify-items:center;
-  gap:12px;padding:16px;background:radial-gradient(circle at 50% 40%,#180b3d,#050110 75%)}
-#mgOv.on{display:grid}
-#mgCanvas{border-radius:18px;background:#0d0326;max-width:94vw;
-  box-shadow:0 0 0 3px rgba(255,212,71,.55),0 0 70px rgba(139,61,255,.55),0 24px 70px rgba(0,0,0,.7)}
-#mgHud{font-family:'Bungee',cursive;font-size:clamp(11px,1.4vw,19px);letter-spacing:1px;color:#FFD447;
-  text-shadow:0 0 22px rgba(255,212,71,.6);min-height:1.2em;text-align:center}
-#mgPills{display:flex;flex-wrap:wrap;gap:7px;justify-content:center}
-.mgPill{font-weight:900;font-size:clamp(8px,.95vw,12px);letter-spacing:1.2px;padding:6px 12px;
-  border-radius:999px;background:rgba(255,255,255,.06);border:2px solid rgba(255,255,255,.14);
-  color:rgba(255,255,255,.45)}
-.mgPill.now{border-color:var(--gold);color:var(--gold);box-shadow:0 0 20px rgba(255,212,71,.45)}
-.mgPill.done{border-color:#9DFF3C;color:#9DFF3C;background:rgba(157,255,60,.12)}
-.mgCard{display:none;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
-  width:min(660px,92vw);text-align:center;padding:clamp(20px,3vw,40px);border-radius:28px;
-  border:5px solid transparent;
-  background:linear-gradient(160deg,#2b0a5e,#12032e) padding-box,
-             conic-gradient(from 0deg,#FFD447,#FF3FD0,#22E7FF,#8B3DFF,#9DFF3C,#FFD447) border-box;
-  animation:cardGlow 1.6s ease-in-out infinite}
-.mgCard.win{background:linear-gradient(160deg,#0d3a1c,#04170c) padding-box,
-             conic-gradient(from 0deg,#9DFF3C,#22E7FF,#FFD447,#9DFF3C) border-box}
-.mgCard.lose{background:linear-gradient(160deg,#3a0512,#160207) padding-box,
-             conic-gradient(from 0deg,#ff3355,#8B3DFF,#ff3355) border-box}
-#mgCardTag{font-family:'Bungee',cursive;font-size:clamp(11px,1.5vw,18px);letter-spacing:4px;color:var(--gold)}
-#mgCardSub{font-family:'Bungee',cursive;font-size:clamp(20px,3.4vw,44px);line-height:1.05;margin:8px 0 12px;
-  background:linear-gradient(92deg,#fff,var(--cyan),#fff,var(--pink),#fff);background-size:300% 100%;
-  -webkit-background-clip:text;background-clip:text;color:transparent;animation:flow 3s linear infinite}
-#mgCardRule{white-space:pre-line;font-weight:700;font-size:clamp(11px,1.25vw,15.5px);line-height:1.6;
-  color:rgba(255,255,255,.82)}
-body.mg-open #stage,body.mg-open #counter,body.mg-open #hint{display:none}
-
 #help{position:fixed;left:16px;bottom:36px;z-index:80;max-width:400px;padding:16px 18px;border-radius:16px;
   background:rgba(8,3,26,.94);border:2px solid rgba(139,61,255,.6);font-size:12.5px;line-height:1.7;
   display:none;box-shadow:0 20px 60px rgba(0,0,0,.6)}
@@ -312,7 +269,7 @@ kbd{background:#2b1055;border:1px solid #5b2fa8;border-bottom-width:3px;border-r
 <div id="stage">
   <header>
     <h1>BLUEBERRY BIRTHDAY MEGA WHEEL</h1>
-    <div class="sub">Happy Birthday Blue &nbsp;&bull;&nbsp; Random Mystery Prizes &nbsp;&bull;&nbsp; Winners Get Bought Live</div>
+    <div class="sub">Happy Birthday Blue &nbsp;&bull;&nbsp; Mystery Prizes &nbsp;&bull;&nbsp; Winners Get Bought Live</div>
   </header>
 
   <div id="wheelWrap">
@@ -383,28 +340,6 @@ kbd{background:#2b1055;border:1px solid #5b2fa8;border-bottom-width:3px;border-r
   </div>
 </div>
 
-<div class="ov" id="lostOv">
-  <div id="lostCard">
-    <div class="skull">&#128128;</div>
-    <div id="lostTag">YOU LOST<br>EVERYTHING</div>
-    <div id="lostSub">Two spins. Two losses. The wheel is closed.</div>
-    <div id="lostHope">...but there is one way back in.</div>
-    <button class="btn pinky" id="lostBtn">ENTER THE COMEBACK GAUNTLET</button>
-  </div>
-</div>
-
-<div id="mgOv">
-  <div id="mgPills"></div>
-  <canvas id="mgCanvas"></canvas>
-  <div id="mgHud"></div>
-  <div class="mgCard" id="mgCard">
-    <div id="mgCardTag"></div>
-    <div id="mgCardSub"></div>
-    <div id="mgCardRule"></div>
-    <button class="btn" id="mgCardBtn">START</button>
-  </div>
-</div>
-
 <div id="giftBanner"><b id="giftText">GIFT PURCHASED!</b><span>It's on the way &mdash; spin again!</span></div>
 
 <div id="start">
@@ -421,12 +356,12 @@ kbd{background:#2b1055;border:1px solid #5b2fa8;border-bottom-width:3px;border-r
 <div id="help">
   <h3>OPERATOR CONTROLS</h3>
   <kbd>SPACE</kbd> spin &nbsp; <kbd>ENTER</kbd> confirm gift bought<br>
-  <kbd>1</kbd> Headband &nbsp; <kbd>2</kbd> Wig &nbsp; <kbd>3</kbd> Horns &nbsp; <kbd>4</kbd> Dispatch &nbsp; <kbd>5</kbd> Celsius<br>
-  <kbd>0</kbd> force FAILED &nbsp; <kbd>G</kbd> skip gauntlet &nbsp; <kbd>R</kbd> full reset &nbsp; <kbd>M</kbd> mute<br>
+  <kbd>1</kbd> Sea Lion &nbsp; <kbd>2</kbd> Jersey &nbsp; <kbd>3</kbd> Cowboy Hat &nbsp; <kbd>4</kbd> Bangles<br>
+  <kbd>5</kbd> Extra Spin &nbsp; <kbd>0</kbd> FAILED &nbsp; <kbd>R</kbd> full reset &nbsp; <kbd>M</kbd> mute<br>
   <kbd>F</kbd> fullscreen &nbsp; <kbd>C</kbd> confetti test &nbsp; <kbd>H</kbd> hide this<br>
-  <span style="opacity:.6;font-size:11.5px">Flow: spin 1 FAIL &rarr; spin 2 FAIL &rarr; YOU LOST EVERYTHING
-  &rarr; 5-game gauntlet (~10 min, unlimited retries, always winnable) &rarr; +2 spins,
-  each a RANDOM pick from the 5 remaining prizes. Operator only &mdash; keep hidden on stream.</span>
+  <span style="opacity:.6;font-size:11.5px">Order: Sea Lion &rarr; FAILED &rarr; Jersey &rarr; SECRET EXTRA SPIN
+  &rarr; Cowboy Hat &rarr; Bangles (total chaos). Nothing else can ever be won.
+  Operator only &mdash; keep this hidden on stream.</span>
 </div>
 
 <script>
@@ -438,40 +373,35 @@ const A = /*ASSETS*/{};
 /* ============================================================
    1. THE SCRIPT - edit this one line to change the show
    ============================================================ */
-/* ------------------------------------------------------------
-   WHAT CAN BE WON
-   alreadyWon:1  -> shown on the wheel stamped ALREADY WON, never winnable
-   win:1         -> in the random prize pool
-   Everything else is decoration: it is on the wheel but can never land.
-   ------------------------------------------------------------ */
+const SEQUENCE = ['sealion', 'FAIL', 'jersey', 'EXTRA', 'cowboy', 'bangle'];
+
+/* All 22 wishlist items. win:1 = one of the 3 real prizes. */
 const ITEMS = [
- {k:'sealion',  n:'Sea Lion Sound Plush Toy',          s:'SEA LION\nPLUSH',    alreadyWon:1},
+ {k:'sealion',  n:'Sea Lion Sound Plush Toy',          s:'SEA LION\nPLUSH',    win:1, url:'https://throne.com/blueberryvibezz/item/5a35b4cc-d124-4dc5-9f8d-f95428215ca3'},
  {k:'ps5',      n:'Blueberryvibezz PS5 Controller',    s:'PS5\nCONTROLLER'},
- {k:'jersey',   n:'Silent Hill Is Broken Mesh Jersey', s:'SILENT HILL\nJERSEY', alreadyWon:1},
- {k:'cowboy',   n:'Cowboy Hat - Brown',                s:'COWBOY\nHAT',        alreadyWon:1},
+ {k:'jersey',   n:'Silent Hill Is Broken Mesh Jersey', s:'SILENT HILL\nJERSEY', win:1, url:'https://throne.com/blueberryvibezz/item/6da4440d-9fc1-43c5-a337-5729c6843daa'},
+ {k:'cowboy',   n:'Cowboy Hat - Brown',                s:'COWBOY\nHAT',      win:1, url:'https://throne.com/blueberryvibezz/item/7d355302-b8a2-423b-896f-b2d9bd3c9b4c'},
  {k:'monitor',  n:'ASUS ROG Swift OLED 27"',           s:'OLED\nMONITOR'},
  {k:'untildawn',n:'Until Dawn',                        s:'UNTIL\nDAWN'},
- {k:'bangle',   n:"Everything's Romantic Bangle Set",  s:'ROMANTIC\nBANGLES',  alreadyWon:1},
+ {k:'bangle',   n:"Everything's Romantic Bangle Set",  s:'ROMANTIC\nBANGLES',  win:1, url:'https://throne.com/blueberryvibezz/item/5efac363-ebac-4aa5-af78-f66067abde71'},
  {k:'axolotl',  n:'The Axolotl Ushanka',               s:'AXOLOTL\nUSHANKA'},
  {k:'neon',     n:'Govee RGBIC Neon Lights',           s:'NEON\nLIGHTS'},
  {k:'pyramid',  n:'Red Pyramid Head Figure',           s:'PYRAMID\nHEAD'},
  {k:'celsius48',n:'48 x Celsius Peachy Vibe',          s:'48x\nCELSIUS'},
  {k:'FAIL',     n:'TRY AGAIN',                         s:'TRY\nAGAIN', fail:1},
- {k:'wig',      n:'Zero Two Cosplay Wig',              s:'ZERO TWO\nWIG',      win:1, url:'https://throne.com/blueberryvibezz/item/6c1ffb36-3808-48f5-abfe-f7f42c8afcb0'},
  {k:'EXTRA',    n:'SECRET EXTRA SPIN',                 s:'EXTRA\nSPIN', extra:1},
+ {k:'wig',      n:'Zero Two Cosplay Wig',              s:'ZERO TWO\nWIG'},
  {k:'gow',      n:'God of War',                        s:'GOD OF\nWAR'},
- {k:'rabbit',   n:'Goth Rabbit Spa Headband',          s:'SPA\nHEADBAND',      win:1, url:'https://throne.com/blueberryvibezz/item/20bf1901-a99f-467a-bf4a-ef874132cefa'},
+ {k:'rabbit',   n:'Goth Rabbit Spa Headband',          s:'SPA\nHEADBAND'},
  {k:'tender',   n:'Tender Hearted Bangle Set',         s:'TENDER\nBANGLES'},
  {k:'hexa',     n:'Govee Glide Hexa Panels',           s:'HEXA\nPANELS'},
  {k:'enderman', n:'The Enderman Ushanka',              s:'ENDERMAN\nUSHANKA'},
  {k:'leon',     n:'Leon S. Kennedy Figure',            s:'LEON\nFIGURE'},
- {k:'horns',    n:'3D Printed Headset Horns',          s:'HEADSET\nHORNS',     win:1, url:'https://throne.com/blueberryvibezz/item/c3966aea-c58b-44ab-9d06-c77cbf720e1d'},
- {k:'dispatch', n:'Dispatch',                          s:'DISPATCH',           win:1, url:'https://throne.com/blueberryvibezz/item/86e34c64-16ea-4d2a-b1b8-15004a46c52f'},
+ {k:'horns',    n:'3D Printed Headset Horns',          s:'HEADSET\nHORNS'},
+ {k:'dispatch', n:'Dispatch',                          s:'DISPATCH'},
  {k:'nurse',    n:'Bubble Head Nurse Figure',          s:'BUBBLE\nNURSE'},
- {k:'celsius24',n:'24 x Celsius Peach Vibe',           s:'24x\nCELSIUS',       win:1, url:'https://throne.com/blueberryvibezz/item/8716d1b1-08cf-4462-bf81-f1d5a1b53df6'},
+ {k:'celsius24',n:'24 x Celsius Peach Vibe',           s:'24x\nCELSIUS'},
 ];
-const PRIZE_SPINS = 2;      /* spins earned back from the gauntlet */
-const LOSS_SPINS  = 2;      /* spins she loses at the start */
 const N = ITEMS.length, SEG = (Math.PI*2)/N;
 const idxOf = k => ITEMS.findIndex(i=>i.k===k);
 
@@ -716,7 +646,6 @@ const Snd = {
 /* ============================================================
    3. WHEEL RENDERING  (drawn once into a sprite, only rotated per frame)
    ============================================================ */
-const WON=[];
 const wheelC = document.getElementById('wheel'), wctx = wheelC.getContext('2d');
 const bulbC  = document.getElementById('bulbs'),  bctx = bulbC.getContext('2d');
 const imgs = {};
@@ -760,11 +689,10 @@ function buildWheelSprite(){
     if(it.fail){ grad.addColorStop(0,'#2b0008'); grad.addColorStop(.6,'#7a001c'); grad.addColorStop(1,'#12000a'); }
     else if(it.extra){ grad.addColorStop(0,'#fffbe6'); grad.addColorStop(.35,'#FFD447'); grad.addColorStop(1,'#a35c00'); }
     else { const c=PAL[i%PAL.length];
-      grad.addColorStop(0,c[0]); grad.addColorStop(1,c[1]); }
+      if(it.win){ grad.addColorStop(0,'#ffffff'); grad.addColorStop(.14,c[0]); grad.addColorStop(1,c[1]); }
+      else { grad.addColorStop(0,c[0]); grad.addColorStop(1,c[1]); } }
     ctx.beginPath(); ctx.moveTo(0,0); ctx.arc(0,0,R-6,a0,a1); ctx.closePath();
     ctx.fillStyle=grad; ctx.fill();
-    const owned = it.alreadyWon || WON.indexOf(it.k)>=0;
-    if(owned){ ctx.fillStyle='rgba(4,0,14,.66)'; ctx.fill(); }
 
     ctx.save(); ctx.clip();
     const sh=ctx.createLinearGradient(0,-R,0,R);
@@ -797,13 +725,13 @@ function buildWheelSprite(){
       ctx.fillText(it.fail?'💀':'⭐',0,0); ctx.restore();
     }
 
-    const lines = owned ? ['ALREADY','WON'] : it.s.split('\n');
+    const lines=it.s.split('\n');
     ctx.textAlign='right'; ctx.textBaseline='middle';
     const fs=R*(lines.length>1?.042:.05);
     ctx.font='900 '+fs+'px Outfit, system-ui, sans-serif';
     ctx.lineWidth=fs*.36; ctx.lineJoin='round';
     ctx.strokeStyle= it.extra?'rgba(255,255,255,.85)':'rgba(0,0,0,.62)';
-    ctx.fillStyle= it.fail?'#ffd2da' : (it.extra?'#3a1f00':(owned?'#ff5b7a':'#ffffff'));
+    ctx.fillStyle= it.fail?'#ffd2da' : (it.extra?'#3a1f00':'#ffffff');
     const lx=R*.63;
     lines.forEach(function(ln,li){
       const y=(li-(lines.length-1)/2)*fs*1.02;
@@ -1003,8 +931,7 @@ function loop(now){
   const dt=Math.min((now-last)/1000,.05); last=now;
   if(dt>0) fpsAvg = fpsAvg*.94 + (1/dt)*.06;
   if(!spinning && idleSpin) rot += dt*.16;
-  if(!document.body.classList.contains('mg-open')){ drawWheel(rot); drawBulbs(dt); }
-  drawP(dt); drawRays(dt);
+  drawWheel(rot); drawBulbs(dt); drawP(dt); drawRays(dt);
   requestAnimationFrame(loop);
 }
 sizeCanvases(); requestAnimationFrame(loop);
@@ -1014,22 +941,7 @@ sizeCanvases(); requestAnimationFrame(loop);
    ============================================================ */
 const hub=document.getElementById('hub'), counter=document.getElementById('counter');
 const pointerEl=document.getElementById('pointer'), wrap=document.getElementById('wheelWrap');
-let spinsTaken=0, spinsAllowed=LOSS_SPINS, comebackBase=LOSS_SPINS, phase='losses', override=null, state='ready';
-/* phase: losses -> gauntlet -> comeback -> done
-   state: ready | spinning | awaitGift | failed | bonus | lost | done */
-
-function prizePool(){
-  return ITEMS.filter(function(it){
-    return it.win && !it.alreadyWon && WON.indexOf(it.k)<0;
-  });
-}
-function pickOutcome(){
-  if(override){ const k=override; override=null; return k; }
-  if(phase==='losses') return 'FAIL';
-  const pool = prizePool();
-  if(!pool.length) return 'FAIL';
-  return pool[(Math.random()*pool.length)|0].k;
-}
+let step=0, override=null, state='ready';   /* ready | spinning | awaitGift | failed | done */
 
 function targetRotationFor(index){
   const centre = index*SEG;
@@ -1044,7 +956,8 @@ function targetRotationFor(index){
 function spin(){
   if(state!=='ready' || spinning) return;
   Snd.init(); if(Snd.ctx.state==='suspended') Snd.ctx.resume();
-  const key = pickOutcome();
+  const key = override || SEQUENCE[Math.min(step, SEQUENCE.length-1)];
+  override = null;
   let targetIdx = idxOf(key); if(targetIdx<0) targetIdx = idxOf('FAIL');
   const item = ITEMS[targetIdx];
 
@@ -1119,7 +1032,7 @@ function chaos(sec){
 }
 
 function doWin(item){
-  const isFinal = (spinsTaken+1 >= spinsAllowed);
+  const isFinal = (step === SEQUENCE.length-1);
   winMode=true; state='awaitGift';
   shake(); flashScreen(1);
   document.getElementById('rays').classList.add('on');
@@ -1174,7 +1087,7 @@ function doWin(item){
     fireworks(10);
   }
   document.getElementById('dim').classList.add('on');
-  setTimeout(function(){ if(state==='awaitGift') document.getElementById('winOv').classList.add('on'); }, isFinal?1300:520);
+  setTimeout(function(){ document.getElementById('winOv').classList.add('on'); }, isFinal?1300:520);
 
   markTracker(item.k);
   hub.disabled=true; hub.textContent='WAITING\nFOR GIFT'; hub.classList.add('waiting');
@@ -1182,15 +1095,12 @@ function doWin(item){
 
 function doFail(){
   state='failed';
-  document.getElementById('failSub').textContent =
-    (phase==='losses' && spinsTaken===0) ? 'One spin left. Do not waste it.'
-                                         : 'Nothing for you... this time';
   shake(); flashScreen(.9,'#ff0033');
   document.getElementById('redveil').style.opacity=1;
   Snd.buzzer(); setTimeout(function(){Snd.sadTrombone();},350);
   setTimeout(function(){ shake(); flashScreen(.4,'#ff0033'); },260);
   document.getElementById('dim').classList.add('on');
-  setTimeout(function(){ if(state==='failed') document.getElementById('failOv').classList.add('on'); },420);
+  setTimeout(function(){ document.getElementById('failOv').classList.add('on'); },420);
   hub.disabled=true; hub.textContent='...';
 }
 
@@ -1206,7 +1116,7 @@ function doExtra(){
   fireworks(4);
   for(let i=0;i<4;i++) setTimeout(function(){ shake(); flashScreen(.3,'#FFD447'); }, 350+i*400);
   document.getElementById('dim').classList.add('on');
-  setTimeout(function(){ if(state==='bonus') document.getElementById('extraOv').classList.add('on'); },500);
+  setTimeout(function(){ document.getElementById('extraOv').classList.add('on'); },500);
   hub.disabled=true; hub.textContent='...';
 }
 function extraAcknowledged(){
@@ -1218,90 +1128,36 @@ function extraAcknowledged(){
 
 function buildTracker(){
   let h='';
-  for(let i=0;i<PRIZE_SPINS;i++) h+='<div class="slot"><div class="qm">?</div>'+
+  for(let i=0;i<4;i++) h+='<div class="slot"><div class="qm">?</div>'+
     '<div><div class="nm">MYSTERY PRIZE</div><div class="st">LOCKED</div></div></div>';
   document.getElementById('tracker').innerHTML=h;
 }
+const WON=[];
 function markTracker(k){
   if(WON.indexOf(k)<0) WON.push(k);
   const el=document.querySelector('#tracker .slot:not(.won)');
   if(!el) return;
-  buildWheelSprite();
   el.classList.add('won');
   el.innerHTML='<img src="'+(A[k]||'')+'" alt=""><div><div class="nm">'+
     ITEMS[idxOf(k)].n+'</div><div class="st">WON!</div></div>';
 }
 function updCounter(){
-  if(phase==='done'){ counter.textContent='ALL DONE'; return; }
-  if(phase==='gauntlet'){ counter.textContent='GAUNTLET'; return; }
-  if(phase==='comeback'){
-    const n = Math.min(PRIZE_SPINS, spinsTaken-comebackBase+1);
-    counter.textContent = 'COMEBACK ' + n + ' / ' + PRIZE_SPINS;
-    return;
-  }
-  counter.textContent = 'SPIN ' + (spinsTaken+1) + ' / ' + LOSS_SPINS;
+  counter.textContent = step>=SEQUENCE.length ? 'ALL DONE' : ('SPIN '+(step+1)+' / '+SEQUENCE.length);
 }
 
 function armNext(){
-  spinsTaken++;
+  step++;
   document.getElementById('redveil').style.opacity=0;
   document.getElementById('rays').classList.remove('on');
   winMode=false; idleSpin=true;
-
-  if(phase==='losses' && spinsTaken>=LOSS_SPINS){
-    phase='gauntlet'; updCounter();
-    state='lost';
-    hub.disabled=true; hub.classList.remove('waiting','ready');
-    hub.textContent='...';
-    showLostEverything();
-    return;
-  }
-  if(spinsTaken>=spinsAllowed){
-    phase='done'; updCounter();
+  updCounter();
+  if(step>=SEQUENCE.length){
     state='done';
     hub.disabled=true; hub.classList.remove('waiting','ready');
     hub.textContent='THE\nEND';
     showFinale();
     return;
   }
-  updCounter();
-  state='ready'; hub.disabled=false; hub.classList.remove('waiting');
-  hub.classList.add('ready'); hub.textContent='SPIN';
-}
-
-/* ---------- rock bottom ---------- */
-function showLostEverything(){
-  document.getElementById('redveil').style.opacity=1;
-  document.getElementById('dim').classList.add('on');
-  Snd.buzzer(); setTimeout(function(){ Snd.sadTrombone(); },300);
-  setTimeout(function(){ Snd.sadTrombone(); },1700);
-  for(let i=0;i<5;i++) setTimeout(function(){ shake(); flashScreen(.3,'#ff0033'); }, i*380);
-  setTimeout(function(){ if(state==='lost') document.getElementById('lostOv').classList.add('on'); },700);
-}
-function enterGauntlet(){
-  if(state!=='lost') return;
-  document.getElementById('lostOv').classList.remove('on');
-  document.getElementById('dim').classList.remove('on');
-  document.getElementById('redveil').style.opacity=0;
-  state='gauntlet';
-  MG.open();
-}
-/* called by the gauntlet when all 5 games are cleared */
-function gauntletCleared(){
-  phase='comeback';
-  comebackBase = spinsTaken;
-  spinsAllowed = spinsTaken + PRIZE_SPINS;
-  updCounter();
-  winMode=true;
-  document.getElementById('rays').classList.add('on');
-  chaos(10);
-  Snd.fanfare(); Snd.jackpot(); Snd.yippee();
-  cannons(); rainConfetti(140); fireworks(7);
-  const b=document.getElementById('giftBanner');
-  document.getElementById('giftText').textContent='+2 SPINS WON BACK!';
-  b.classList.add('on');
-  setTimeout(function(){ b.classList.remove('on');
-    document.getElementById('giftText').textContent='GIFT PURCHASED!'; },5200);
   state='ready'; hub.disabled=false; hub.classList.remove('waiting');
   hub.classList.add('ready'); hub.textContent='SPIN';
 }
@@ -1320,7 +1176,7 @@ function showFinale(){
   Snd.fanfare(); Snd.jackpot(); Snd.yippee();
   setTimeout(function(){ Snd.yippee(); },2200);
   cannons(); rainConfetti(160); fireworks(8);
-  setTimeout(function(){ if(state==='done') document.getElementById('sumOv').classList.add('on'); },500);
+  setTimeout(function(){ document.getElementById('sumOv').classList.add('on'); },500);
 }
 
 function giftConfirmed(){
@@ -1349,7 +1205,6 @@ hub.addEventListener('click', spin);
 document.getElementById('winBtn').addEventListener('click', giftConfirmed);
 document.getElementById('failBtn').addEventListener('click', failAcknowledged);
 document.getElementById('extraBtn').addEventListener('click', extraAcknowledged);
-document.getElementById('lostBtn').addEventListener('click', enterGauntlet);
 
 const startEl=document.getElementById('start');
 let started=false;
@@ -1384,7 +1239,6 @@ function begin(){
 startEl.addEventListener('click', begin);
 
 addEventListener('keydown', function(e){
-  if(MG.active()) return;
   const k=e.key.toLowerCase();
   if(k===' '||e.code==='Space'){
     e.preventDefault();
@@ -1393,23 +1247,20 @@ addEventListener('keydown', function(e){
     else if(state==='awaitGift') giftConfirmed();
     else if(state==='failed') failAcknowledged();
     else if(state==='bonus') extraAcknowledged();
-    else if(state==='lost') enterGauntlet();
     return;
   }
   if(k==='enter'){
     if(state==='awaitGift') giftConfirmed();
     else if(state==='failed') failAcknowledged();
     else if(state==='bonus') extraAcknowledged();
-    else if(state==='lost') enterGauntlet();
     else if(!started) begin();
     return;
   }
-  if(k==='1') override='rabbit';
-  if(k==='2') override='wig';
-  if(k==='3') override='horns';
-  if(k==='4') override='dispatch';
-  if(k==='5') override='celsius24';
-  if(k==='g'){ phase='comeback'; comebackBase=spinsTaken; spinsAllowed=spinsTaken+PRIZE_SPINS; state='ready'; hub.disabled=false; hub.classList.add('ready'); hub.textContent='SPIN'; updCounter(); }
+  if(k==='1') override='sealion';
+  if(k==='2') override='jersey';
+  if(k==='3') override='cowboy';
+  if(k==='4') override='bangle';
+  if(k==='5') override='EXTRA';
   if(k==='0') override='FAIL';
   if(k==='c'){ cannons(); rainConfetti(120); fireworks(3); }
   if(k==='m'){ Snd.muted=!Snd.muted; }
@@ -1417,682 +1268,6 @@ addEventListener('keydown', function(e){
   if(k==='r') location.reload();
   if(k==='f'){ if(document.fullscreenElement) document.exitFullscreen(); else document.documentElement.requestFullscreen(); }
 });
-
-/* GAUNTLET MODULE */
-/* ============================================================
-   8. THE COMEBACK GAUNTLET - 5 mini games, ~10 minutes
-   Rules: hard, but unlimited retries and every retry gets
-   easier, so it is always winnable. Clear all 5 => +2 spins.
-   ============================================================ */
-const MG = (function(){
-
-const LW = 960, LH = 540;                 /* logical play field */
-const ov   = document.getElementById('mgOv');
-const cv   = document.getElementById('mgCanvas');
-const ctx  = cv.getContext('2d');
-const hud  = document.getElementById('mgHud');
-const card = document.getElementById('mgCard');
-const cTag = document.getElementById('mgCardTag');
-const cSub = document.getElementById('mgCardSub');
-const cRule= document.getElementById('mgCardRule');
-const cBtn = document.getElementById('mgCardBtn');
-const pills= document.getElementById('mgPills');
-
-let SC = 1;
-let raf = null, running = false, lastT = 0;
-let game = null, stageIdx = 0, fails = {}, activeFlag = false;
-const held = {};
-let bound = [];
-
-function on(t,e,f){ t.addEventListener(e,f); bound.push([t,e,f]); }
-function unbindAll(){ bound.forEach(function(b){ b[0].removeEventListener(b[1],b[2]); }); bound=[]; }
-
-function fit(){
-  const w = Math.min(innerWidth*0.94, (innerHeight*0.72)*LW/LH);
-  const h = w*LH/LW;
-  cv.style.width = w+'px'; cv.style.height = h+'px';
-  cv.width  = Math.max(2,Math.round(w*DPR));
-  cv.height = Math.max(2,Math.round(h*DPR));
-  SC = (w/LW)*DPR;
-}
-addEventListener('resize', function(){ if(activeFlag) fit(); });
-
-function pt(e){
-  const r = cv.getBoundingClientRect();
-  const cx = (e.touches ? e.touches[0].clientX : e.clientX);
-  const cy = (e.touches ? e.touches[0].clientY : e.clientY);
-  return { x:(cx-r.left)/r.width*LW, y:(cy-r.top)/r.height*LH };
-}
-
-/* ---------- shared drawing helpers ---------- */
-function bgGrid(t){
-  ctx.fillStyle='#0d0326'; ctx.fillRect(0,0,LW,LH);
-  const g=ctx.createRadialGradient(LW/2,LH*.42,40,LW/2,LH*.42,LW*.72);
-  g.addColorStop(0,'rgba(90,30,180,.55)'); g.addColorStop(1,'rgba(8,2,24,0)');
-  ctx.fillStyle=g; ctx.fillRect(0,0,LW,LH);
-  ctx.strokeStyle='rgba(255,255,255,.05)'; ctx.lineWidth=1;
-  const off=(t*26)%44;
-  for(let x=-44+off;x<LW;x+=44){ ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,LH); ctx.stroke(); }
-  for(let y=-44+off;y<LH;y+=44){ ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(LW,y); ctx.stroke(); }
-}
-function txt(s,x,y,size,col,align,weight){
-  ctx.font=(weight||900)+' '+size+'px Outfit, system-ui, sans-serif';
-  ctx.textAlign=align||'center'; ctx.textBaseline='middle';
-  ctx.lineWidth=size*.28; ctx.lineJoin='round'; ctx.strokeStyle='rgba(0,0,0,.65)';
-  ctx.strokeText(s,x,y); ctx.fillStyle=col||'#fff'; ctx.fillText(s,x,y);
-}
-function roundRect(x,y,w,h,r){
-  ctx.beginPath();
-  ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r);
-  ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath();
-}
-function pulse(t){ return .5+.5*Math.sin(t*6); }
-
-/* ============================================================
-   GAME 1 - BERRY CATCHER
-   ============================================================ */
-function gameCatch(env){
-  const m = env.mercy;
-  const need = Math.max(45, 80 - m*10);
-  let lives = 5 + m;
-  let caught = 0, t = 0, spawnAt = .5, items = [], px = LW/2, pop = 0, shakeT = 0;
-  const BW = 130 + m*22, BH = 26;
-
-  function interval(){ return Math.max(.34, .72 - t*.0028); }
-  function fallSpeed(){ return Math.min(470, 200 + t*3.1); }
-
-  on(cv,'pointermove',function(e){ px = pt(e).x; });
-  on(window,'keydown',function(e){ held[e.key.toLowerCase()]=1; });
-  on(window,'keyup',function(e){ held[e.key.toLowerCase()]=0; });
-
-  return {
-    update:function(dt){
-      t+=dt; spawnAt-=dt; pop=Math.max(0,pop-dt*4); shakeT=Math.max(0,shakeT-dt*3);
-      if(held['arrowleft']||held['a']) px-=760*dt;
-      if(held['arrowright']||held['d']) px+=760*dt;
-      px = Math.max(BW/2, Math.min(LW-BW/2, px));
-
-      if(spawnAt<=0){
-        spawnAt = interval();
-        const r = Math.random();
-        const kind = r<.20 ? 'bomb' : (r<.28 ? 'gold' : 'berry');
-        items.push({ x:40+Math.random()*(LW-80), y:-30, k:kind,
-                     v:fallSpeed()*(.85+Math.random()*.3), r:kind==='gold'?17:15, sp:Math.random()*6 });
-      }
-      const by = LH-52;
-      for(let i=items.length-1;i>=0;i--){
-        const o=items[i]; o.y += o.v*dt; o.sp += dt*4;
-        if(o.y > by-o.r && o.y < by+BH+o.r && Math.abs(o.x-px) < BW/2+o.r*.7){
-          items.splice(i,1);
-          if(o.k==='bomb'){ lives--; shakeT=1; Snd.buzzer(); flashScreen(.22,'#ff0033'); shake();
-            if(lives<=0){ env.lose(); return; } }
-          else {
-            const add = o.k==='gold'?3:1;
-            caught += add; pop=1;
-            Snd.ding(o.k==='gold'?1400:820+Math.random()*260,undefined,.55);
-            if(o.k==='gold'){ Snd.coins(4); }
-            if(caught>=need){ env.win(); return; }
-          }
-          continue;
-        }
-        if(o.y > LH+40) items.splice(i,1);
-      }
-      env.hud('CAUGHT '+caught+' / '+need+'   ·   LIVES '+lives);
-    },
-    draw:function(){
-      ctx.save();
-      if(shakeT>0) ctx.translate((Math.random()-.5)*10*shakeT,(Math.random()-.5)*10*shakeT);
-      bgGrid(t);
-      const by = LH-52;
-      /* basket */
-      ctx.save();
-      ctx.shadowColor='rgba(255,63,208,.9)'; ctx.shadowBlur=26;
-      const gg=ctx.createLinearGradient(px-BW/2,0,px+BW/2,0);
-      gg.addColorStop(0,'#FF3FD0'); gg.addColorStop(.5,'#8B3DFF'); gg.addColorStop(1,'#22E7FF');
-      ctx.fillStyle=gg; roundRect(px-BW/2,by,BW,BH,10); ctx.fill();
-      ctx.restore();
-      ctx.fillStyle='rgba(255,255,255,.35)'; roundRect(px-BW/2+6,by+4,BW-12,6,3); ctx.fill();
-
-      items.forEach(function(o){
-        ctx.save(); ctx.translate(o.x,o.y); ctx.rotate(Math.sin(o.sp)*.3);
-        if(o.k==='bomb'){
-          ctx.fillStyle='#1a1a22'; ctx.beginPath(); ctx.arc(0,0,o.r,0,7); ctx.fill();
-          ctx.strokeStyle='#ff3355'; ctx.lineWidth=3; ctx.stroke();
-          ctx.font='18px serif'; ctx.textAlign='center'; ctx.textBaseline='middle';
-          ctx.fillText('💣',0,1);
-        } else if(o.k==='gold'){
-          ctx.shadowColor='rgba(255,212,71,1)'; ctx.shadowBlur=20;
-          ctx.fillStyle='#FFD447'; ctx.beginPath(); ctx.arc(0,0,o.r,0,7); ctx.fill();
-          ctx.shadowBlur=0; ctx.font='19px serif'; ctx.textAlign='center'; ctx.textBaseline='middle';
-          ctx.fillText('⭐',0,1);
-        } else {
-          ctx.shadowColor='rgba(120,80,255,.9)'; ctx.shadowBlur=14;
-          ctx.fillStyle='#7a4cff'; ctx.beginPath(); ctx.arc(0,0,o.r,0,7); ctx.fill();
-          ctx.shadowBlur=0; ctx.font='18px serif'; ctx.textAlign='center'; ctx.textBaseline='middle';
-          ctx.fillText('🫐',0,1);
-        }
-        ctx.restore();
-      });
-      if(pop>0) txt('+',px,by-30-pop*18,26+pop*14,'rgba(255,255,255,'+pop+')');
-      ctx.restore();
-    }
-  };
-}
-
-/* ============================================================
-   GAME 2 - ORK RHYTHM  (D F J K)
-   ============================================================ */
-function gameRhythm(env){
-  const m = env.mercy;
-  const KEYS = ['d','f','j','k'];
-  const COLS = ['#FF3FD0','#FFD447','#22E7FF','#9DFF3C'];
-  const TRAVEL = 1.9, HITLINE = LH-96;
-  const WIN_MS = 0.155 + m*0.035;
-  const needPct = Math.max(.55, .78 - m*.06);
-
-  /* deterministic chart: 112 notes, ~100 s */
-  const chart = [];
-  (function(){
-    let tt = 2.0, seed = 20260910, i = 0;
-    function rnd(){ seed = (seed*1103515245 + 12345) & 0x7fffffff; return seed/0x7fffffff; }
-    while(chart.length < 112){
-      chart.push({ t:tt, lane:(rnd()*4)|0, hit:false, dead:false });
-      const phase = chart.length/112;
-      const gap = phase<.25 ? .82 : phase<.5 ? .68 : phase<.75 ? .56 : .48;
-      tt += gap*(rnd()<.18 ? .5 : 1);
-      i++;
-    }
-  })();
-  const endT = chart[chart.length-1].t + 1.2;
-
-  let t=0, hits=0, misses=0, combo=0, best=0, flash=[0,0,0,0], judge='', judgeT=0;
-
-  function judgeHit(lane){
-    let bestNote=null, bestD=9;
-    for(let i=0;i<chart.length;i++){
-      const n=chart[i];
-      if(n.hit||n.dead) continue;
-      const d=Math.abs(n.t-t);
-      if(d<bestD){ bestD=d; bestNote=n; }
-      if(n.t-t>WIN_MS+.3) break;
-    }
-    flash[lane]=1;
-    if(bestNote && bestNote.lane===lane && bestD<=WIN_MS){
-      bestNote.hit=true; hits++; combo++; best=Math.max(best,combo);
-      judge = bestD<WIN_MS*.4 ? 'PERFECT!' : 'GOOD'; judgeT=1;
-      Snd.ding(660+lane*140,undefined,.5);
-      if(combo%10===0){ Snd.coins(5); burst(innerWidth/2,innerHeight*.55,26,{speed:11,g:.2}); }
-    } else {
-      combo=0; judge='MISS'; judgeT=1; Snd.clack(1.2);
-    }
-  }
-
-  on(window,'keydown',function(e){
-    if(e.repeat) return;
-    const i = KEYS.indexOf(e.key.toLowerCase());
-    if(i>=0){ e.preventDefault(); judgeHit(i); }
-  });
-
-  return {
-    update:function(dt){
-      t+=dt; judgeT=Math.max(0,judgeT-dt*1.6);
-      for(let i=0;i<4;i++) flash[i]=Math.max(0,flash[i]-dt*4);
-      for(let i=0;i<chart.length;i++){
-        const n=chart[i];
-        if(!n.hit && !n.dead && t - n.t > WIN_MS){ n.dead=true; misses++; combo=0; }
-      }
-      const pct = hits/chart.length;
-      env.hud('HITS '+hits+' / '+chart.length+'   ·   COMBO '+combo+
-              '   ·   NEED '+Math.round(needPct*100)+'%   ·   NOW '+Math.round(pct*100)+'%');
-      if(t>endT){ if(pct>=needPct) env.win(); else env.lose(); }
-      /* impossible to still reach the target -> end early */
-      const maxPossible = (hits + chart.filter(function(n){return !n.hit && !n.dead;}).length)/chart.length;
-      if(maxPossible < needPct){ env.lose(); }
-    },
-    draw:function(){
-      bgGrid(t);
-      const laneW = 120, x0 = LW/2 - laneW*2;
-      for(let i=0;i<4;i++){
-        const x = x0 + i*laneW;
-        ctx.fillStyle='rgba(255,255,255,.045)'; ctx.fillRect(x+4,0,laneW-8,LH);
-        ctx.fillStyle='rgba(255,255,255,'+(0.06+flash[i]*.32)+')';
-        ctx.fillRect(x+4,HITLINE-30,laneW-8,60);
-        ctx.save(); ctx.shadowColor=COLS[i]; ctx.shadowBlur=12+flash[i]*26;
-        ctx.strokeStyle=COLS[i]; ctx.lineWidth=4;
-        roundRect(x+10,HITLINE-24,laneW-20,48,12); ctx.stroke(); ctx.restore();
-        txt(KEYS[i].toUpperCase(), x+laneW/2, HITLINE, 24, COLS[i]);
-      }
-      chart.forEach(function(n){
-        if(n.hit) return;
-        const dt2 = n.t - t;
-        if(dt2 > TRAVEL || dt2 < -.35) return;
-        const y = HITLINE - (dt2/TRAVEL)*(HITLINE+60);
-        const x = x0 + n.lane*laneW;
-        ctx.save();
-        ctx.globalAlpha = n.dead ? .25 : 1;
-        ctx.shadowColor=COLS[n.lane]; ctx.shadowBlur=18;
-        ctx.fillStyle=COLS[n.lane];
-        roundRect(x+14, y-16, laneW-28, 32, 10); ctx.fill();
-        ctx.restore();
-      });
-      if(judgeT>0) txt(judge, LW/2, HITLINE-120, 34+judgeT*10,
-        judge==='MISS' ? 'rgba(255,80,110,'+judgeT+')' : 'rgba(255,255,255,'+judgeT+')');
-      txt('ORK ORK RHYTHM', LW/2, 34, 24, 'rgba(255,255,255,.55)');
-    }
-  };
-}
-
-/* ============================================================
-   GAME 3 - BERRY MEMORY
-   ============================================================ */
-function gameMemory(env){
-  const m = env.mercy;
-  const pool = ITEMS.filter(function(it){ return imgs[it.k] && !it.fail && !it.extra; }).slice(0,12);
-  const PAIRS = pool.length;
-  let deck = [];
-  pool.forEach(function(it,i){ deck.push({k:it.k,id:i}); deck.push({k:it.k,id:i}); });
-  for(let i=deck.length-1;i>0;i--){ const j=(Math.random()*(i+1))|0; const s=deck[i]; deck[i]=deck[j]; deck[j]=s; }
-
-  const COLS_N = 6, ROWS = Math.ceil(deck.length/COLS_N);
-  const CW = 128, CH = 78, GAP = 12;
-  const gridW = COLS_N*CW + (COLS_N-1)*GAP, gridH = ROWS*CH + (ROWS-1)*GAP;
-  const gx = (LW-gridW)/2, gy = (LH-gridH)/2 + 14;
-
-  deck.forEach(function(c,i){
-    c.col = i%COLS_N; c.row = (i/COLS_N)|0;
-    c.x = gx + c.col*(CW+GAP); c.y = gy + c.row*(CH+GAP);
-    c.face = 0; c.done = false;
-  });
-
-  let t=0, left = 155 + m*45, a=null, b=null, lockT=0, matched=0, tries=0;
-
-  on(cv,'pointerdown',function(e){
-    if(lockT>0) return;
-    const p = pt(e);
-    for(let i=0;i<deck.length;i++){
-      const c=deck[i];
-      if(c.done || c===a) continue;
-      if(p.x>c.x && p.x<c.x+CW && p.y>c.y && p.y<c.y+CH){
-        if(!a){ a=c; Snd.clack(.9); }
-        else if(!b){
-          b=c; tries++; Snd.clack(.9);
-          if(a.id===b.id){
-            a.done=b.done=true; matched++;
-            Snd.ding(700+matched*70,undefined,.7); Snd.coins(3);
-            burst(innerWidth/2, innerHeight/2, 22, {speed:10,g:.2});
-            a=b=null;
-            if(matched>=PAIRS){ env.win(); }
-          } else { lockT=.75; }
-        }
-        return;
-      }
-    }
-  });
-
-  return {
-    update:function(dt){
-      t+=dt; left-=dt;
-      deck.forEach(function(c){
-        const want = (c===a||c===b||c.done) ? 1 : 0;
-        c.face += (want-c.face)*Math.min(1,dt*11);
-      });
-      if(lockT>0){ lockT-=dt; if(lockT<=0){ a=b=null; } }
-      env.hud('PAIRS '+matched+' / '+PAIRS+'   ·   TIME '+Math.max(0,left).toFixed(0)+'s   ·   FLIPS '+tries);
-      if(left<=0) env.lose();
-    },
-    draw:function(){
-      bgGrid(t);
-      txt('BERRY MEMORY  -  match every pair before the clock dies', LW/2, 30, 20, 'rgba(255,255,255,.6)');
-      /* timer bar */
-      const totalT = 155 + m*45;
-      ctx.fillStyle='rgba(255,255,255,.12)'; roundRect(LW/2-260,48,520,9,5); ctx.fill();
-      ctx.fillStyle = left<25 ? '#ff3355' : '#22E7FF';
-      roundRect(LW/2-260,48,520*Math.max(0,left/totalT),9,5); ctx.fill();
-
-      deck.forEach(function(c){
-        const f = c.face, sx = Math.abs(Math.cos(f*Math.PI/2));
-        ctx.save();
-        ctx.translate(c.x+CW/2, c.y+CH/2);
-        ctx.scale(Math.max(.02,sx), 1);
-        ctx.globalAlpha = c.done ? .55 : 1;
-        if(f<.5){
-          const g=ctx.createLinearGradient(-CW/2,-CH/2,CW/2,CH/2);
-          g.addColorStop(0,'#8B3DFF'); g.addColorStop(1,'#3d1080');
-          ctx.fillStyle=g; roundRect(-CW/2,-CH/2,CW,CH,12); ctx.fill();
-          ctx.strokeStyle='rgba(255,212,71,.7)'; ctx.lineWidth=3; ctx.stroke();
-          ctx.font='30px serif'; ctx.textAlign='center'; ctx.textBaseline='middle';
-          ctx.fillText('🫐',0,2);
-        } else {
-          ctx.fillStyle='#fff'; roundRect(-CW/2,-CH/2,CW,CH,12); ctx.fill();
-          ctx.strokeStyle= c.done ? '#9DFF3C' : '#FFD447'; ctx.lineWidth=3; ctx.stroke();
-          const im=imgs[c.k];
-          if(im && im.complete && im.naturalWidth){
-            const ar=im.naturalWidth/im.naturalHeight;
-            let w=CW-16, h=w/ar;
-            if(h>CH-14){ h=CH-14; w=h*ar; }
-            ctx.drawImage(im,-w/2,-h/2,w,h);
-          }
-        }
-        ctx.restore();
-      });
-    }
-  };
-}
-
-/* ============================================================
-   GAME 4 - PYRAMID DODGE
-   ============================================================ */
-function gameDodge(env){
-  const m = env.mercy;
-  const SURVIVE = Math.max(45, 80 - m*9);
-  let lives = 3 + m, t=0, inv=0, spawnAt=1.2, shots=[], px=LW/2, py=LH/2, useMouse=false;
-
-  on(cv,'pointermove',function(e){ const p=pt(e); px=p.x; py=p.y; useMouse=true; });
-  on(window,'keydown',function(e){ held[e.key.toLowerCase()]=1; });
-  on(window,'keyup',function(e){ held[e.key.toLowerCase()]=0; });
-
-  function interval(){ return Math.max(.18, .62 - t*.0055); }
-  function speed(){ return 190 + t*3.4; }
-
-  return {
-    update:function(dt){
-      t+=dt; inv=Math.max(0,inv-dt); spawnAt-=dt;
-      const kb = 470*dt;
-      if(held['arrowleft']||held['a']){ px-=kb; useMouse=false; }
-      if(held['arrowright']||held['d']){ px+=kb; useMouse=false; }
-      if(held['arrowup']||held['w']){ py-=kb; useMouse=false; }
-      if(held['arrowdown']||held['s']){ py+=kb; useMouse=false; }
-      px=Math.max(16,Math.min(LW-16,px)); py=Math.max(16,Math.min(LH-16,py));
-
-      if(spawnAt<=0){
-        spawnAt=interval();
-        const n = 1 + (t>30?1:0) + (t>55?1:0);
-        for(let i=0;i<n;i++){
-          const side=(Math.random()*4)|0;
-          let x,y;
-          if(side===0){ x=Math.random()*LW; y=-20; }
-          else if(side===1){ x=LW+20; y=Math.random()*LH; }
-          else if(side===2){ x=Math.random()*LW; y=LH+20; }
-          else { x=-20; y=Math.random()*LH; }
-          const ang=Math.atan2(py-y, px-x) + (Math.random()-.5)*.5;
-          const sp=speed()*(.85+Math.random()*.35);
-          shots.push({x:x,y:y,vx:Math.cos(ang)*sp,vy:Math.sin(ang)*sp,r:9+Math.random()*5,rot:Math.random()*7});
-        }
-      }
-      for(let i=shots.length-1;i>=0;i--){
-        const s=shots[i]; s.x+=s.vx*dt; s.y+=s.vy*dt; s.rot+=dt*5;
-        if(s.x<-60||s.x>LW+60||s.y<-60||s.y>LH+60){ shots.splice(i,1); continue; }
-        if(inv<=0){
-          const dx=s.x-px, dy=s.y-py;
-          if(dx*dx+dy*dy < (s.r+13)*(s.r+13)){
-            shots.splice(i,1); lives--; inv=1.4;
-            Snd.buzzer(); flashScreen(.3,'#ff0033'); shake();
-            if(lives<=0){ env.lose(); return; }
-          }
-        }
-      }
-      env.hud('SURVIVE '+Math.min(SURVIVE,t).toFixed(1)+' / '+SURVIVE+'s   ·   LIVES '+lives);
-      if(t>=SURVIVE){ env.win(); }
-    },
-    draw:function(){
-      bgGrid(t);
-      ctx.fillStyle='rgba(255,255,255,.12)'; roundRect(LW/2-280,26,560,10,5); ctx.fill();
-      ctx.fillStyle='#9DFF3C'; roundRect(LW/2-280,26,560*Math.min(1,t/SURVIVE),10,5); ctx.fill();
-      txt('DODGE THE PYRAMID HEADS', LW/2, 60, 20, 'rgba(255,255,255,.55)');
-
-      shots.forEach(function(s){
-        ctx.save(); ctx.translate(s.x,s.y); ctx.rotate(s.rot);
-        ctx.shadowColor='rgba(255,40,80,.9)'; ctx.shadowBlur=16;
-        ctx.fillStyle='#ff2a4d'; ctx.beginPath();
-        ctx.moveTo(0,-s.r); ctx.lineTo(s.r,s.r); ctx.lineTo(-s.r,s.r); ctx.closePath(); ctx.fill();
-        ctx.restore();
-      });
-      ctx.save();
-      ctx.globalAlpha = inv>0 ? (.35+.65*Math.abs(Math.sin(t*22))) : 1;
-      ctx.shadowColor='rgba(34,231,255,1)'; ctx.shadowBlur=24;
-      ctx.fillStyle='#22E7FF'; ctx.beginPath(); ctx.arc(px,py,13,0,7); ctx.fill();
-      ctx.shadowBlur=0; ctx.font='16px serif'; ctx.textAlign='center'; ctx.textBaseline='middle';
-      ctx.fillText('🫐',px,py+1);
-      ctx.restore();
-      txt(useMouse?'mouse to move':'WASD / arrows', LW/2, LH-22, 15, 'rgba(255,255,255,.35)');
-    }
-  };
-}
-
-/* ============================================================
-   GAME 5 - SEA LION SMACK
-   ============================================================ */
-function gameSmack(env){
-  const m = env.mercy;
-  const need = Math.max(22, 35 - m*4);
-  const allowMiss = 10 + m*4;
-  let t=0, hits=0, missed=0, spawnAt=.6, holes=[], pops=[];
-
-  const COLS_N=4, ROWS=3, HW=150, HH=104, GX=(LW-(COLS_N*HW))/2, GY=118;
-  for(let r=0;r<ROWS;r++) for(let c=0;c<COLS_N;c++)
-    holes.push({ x:GX+c*HW+HW/2, y:GY+r*HH+HH/2, up:0, life:0, max:0, smacked:false });
-
-  function showTime(){ return Math.max(.62, 1.25 + m*.22 - t*.006); }
-  function interval(){ return Math.max(.34, .78 - t*.004); }
-
-  on(cv,'pointerdown',function(e){
-    const p=pt(e);
-    let got=false;
-    holes.forEach(function(h){
-      if(h.life>0 && !h.smacked && Math.abs(p.x-h.x)<52 && Math.abs(p.y-h.y)<46){
-        h.smacked=true; h.life=Math.min(h.life,.18); hits++; got=true;
-        pops.push({x:h.x,y:h.y,t:1});
-        if(hits%5===0){ Snd.seaLionLaugh(undefined,.35); } else { Snd.bark(); }
-        Snd.ding(900+Math.random()*400,undefined,.5);
-        if(hits>=need){ env.win(); }
-      }
-    });
-    if(!got){ Snd.clack(.8); }
-  });
-
-  return {
-    update:function(dt){
-      t+=dt; spawnAt-=dt;
-      if(spawnAt<=0){
-        spawnAt=interval();
-        const free=holes.filter(function(h){ return h.life<=0; });
-        if(free.length){
-          const h=free[(Math.random()*free.length)|0];
-          h.max=showTime(); h.life=h.max; h.smacked=false;
-        }
-      }
-      holes.forEach(function(h){
-        if(h.life>0){
-          h.life-=dt;
-          const k=1-h.life/h.max;
-          h.up = Math.min(1, Math.sin(Math.min(1,k*1.6)*Math.PI*.5)*1.15);
-          if(h.life<=0){
-            h.up=0;
-            if(!h.smacked){ missed++; Snd.clack(.5); flashScreen(.12,'#ff0033'); }
-          }
-        }
-      });
-      for(let i=pops.length-1;i>=0;i--){ pops[i].t-=dt*2.2; if(pops[i].t<=0) pops.splice(i,1); }
-      env.hud('SMACKED '+hits+' / '+need+'   ·   ESCAPED '+missed+' / '+allowMiss);
-      if(missed>=allowMiss) env.lose();
-    },
-    draw:function(){
-      bgGrid(t);
-      txt('SMACK THE SEA LIONS - click them before they escape', LW/2, 40, 20, 'rgba(255,255,255,.6)');
-      holes.forEach(function(h){
-        ctx.save();
-        ctx.fillStyle='rgba(0,0,0,.42)';
-        ctx.beginPath(); ctx.ellipse(h.x,h.y+34,54,17,0,0,7); ctx.fill();
-        if(h.up>0.02){
-          const yy = h.y+34 - h.up*62;
-          ctx.save();
-          ctx.translate(h.x, yy);
-          ctx.scale(1, .85+h.up*.2);
-          ctx.shadowColor = h.smacked ? 'rgba(157,255,60,.9)' : 'rgba(34,231,255,.75)';
-          ctx.shadowBlur = 20;
-          ctx.fillStyle = h.smacked ? '#9DFF3C' : '#6a4a3a';
-          ctx.beginPath(); ctx.ellipse(0,0,40,34,0,0,7); ctx.fill();
-          ctx.shadowBlur=0;
-          ctx.font='42px serif'; ctx.textAlign='center'; ctx.textBaseline='middle';
-          ctx.fillText(h.smacked?'💥':'🦭',0,2);
-          ctx.restore();
-        }
-        ctx.restore();
-      });
-      pops.forEach(function(p){
-        txt('+1', p.x, p.y-40-(1-p.t)*26, 26, 'rgba(157,255,60,'+p.t+')');
-      });
-    }
-  };
-}
-
-/* ============================================================
-   STAGES
-   ============================================================ */
-const STAGES = [
-  { id:'catch',  name:'BERRY CATCHER', icon:'🫐',
-    rule:'Catch the blueberries. Dodge the bombs. Gold stars are worth 3.',
-    ctrl:'Mouse or ← →', make:gameCatch },
-  { id:'rhythm', name:'ORK RHYTHM', icon:'🎵',
-    rule:'Hit the notes as they cross the line. Keep the combo alive.',
-    ctrl:'D  F  J  K', make:gameRhythm },
-  { id:'memory', name:'BERRY MEMORY', icon:'🧠',
-    rule:'Find every matching pair from the wishlist before the clock runs out.',
-    ctrl:'Click the cards', make:gameMemory },
-  { id:'dodge',  name:'PYRAMID DODGE', icon:'🔺',
-    rule:'Survive the barrage. Three hits and it is over.',
-    ctrl:'Mouse or WASD', make:gameDodge },
-  { id:'smack',  name:'SEA LION SMACK', icon:'🦭',
-    rule:'Smack every sea lion before it ducks back down. Let too many escape and you lose.',
-    ctrl:'Click them', make:gameSmack }
-];
-
-/* ============================================================
-   ENGINE
-   ============================================================ */
-function stopLoop(){
-  if(raf){ cancelAnimationFrame(raf); raf=null; }
-  running=false; game=null;
-  unbindAll();
-  for(const k in held) held[k]=0;
-}
-
-function loop(now){
-  if(!running){ return; }
-  const dt = Math.min(.05, (now-lastT)/1000); lastT=now;
-  raf = requestAnimationFrame(loop);
-  try{
-    if(game){ game.update(dt); }
-    if(game){ ctx.setTransform(SC,0,0,SC,0,0); game.draw(); }
-  }catch(err){
-    /* never let a mini game soft-lock the show */
-    console.error('minigame error', err);
-    stopLoop(); stageWin();
-  }
-}
-
-function showCard(tag, sub, rule, btnText, btnFn, cls){
-  card.className = 'mgCard ' + (cls||'');
-  cTag.textContent = tag; cSub.textContent = sub; cRule.textContent = rule;
-  cBtn.textContent = btnText;
-  cBtn.onclick = btnFn;
-  card.style.display='block';
-  cv.style.visibility='hidden'; hud.style.visibility='hidden';
-}
-function hideCard(){
-  card.style.display='none';
-  cv.style.visibility='visible'; hud.style.visibility='visible';
-}
-
-function renderPills(){
-  let h='';
-  STAGES.forEach(function(s,i){
-    const st = i<stageIdx ? 'done' : (i===stageIdx ? 'now' : '');
-    h += '<div class="mgPill '+st+'">'+s.icon+' '+s.name+(i<stageIdx?' ✔':'')+'</div>';
-  });
-  pills.innerHTML=h;
-}
-
-function startStage(){
-  renderPills();
-  const s = STAGES[stageIdx];
-  const f = fails[s.id]||0;
-  showCard(
-    'STAGE ' + (stageIdx+1) + ' / ' + STAGES.length,
-    s.icon + '  ' + s.name,
-    s.rule + '\n\nControls: ' + s.ctrl + (f? '\n\nRetry #'+f+' - this run is easier.' : ''),
-    'START', runStage, 'intro');
-  Snd.ding(520,undefined,.8); Snd.ding(780,Snd.t+.12,.8);
-}
-
-function runStage(){
-  const s = STAGES[stageIdx];
-  hideCard(); fit();
-  const env = {
-    mercy: fails[s.id]||0,
-    hud: function(txt2){ hud.textContent = txt2; },
-    win: function(){ if(!running) return; stopLoop(); stageWin(); },
-    lose:function(){ if(!running) return; stopLoop(); stageLose(); }
-  };
-  game = s.make(env);
-  running = true; lastT = performance.now();
-  raf = requestAnimationFrame(loop);
-  Snd.ding(880,undefined,.9);
-}
-
-function stageWin(){
-  const s = STAGES[stageIdx];
-  Snd.fanfare(); cannons(); rainConfetti(90); shake(); flashScreen(.6);
-  burst(innerWidth/2, innerHeight*.5, 90, {speed:16,g:.2,coin:.3});
-  stageIdx++;
-  renderPills();
-  if(stageIdx >= STAGES.length){
-    showCard('GAUNTLET CLEARED', '🏆  YOU GOT THEM BACK',
-      'All five games beaten. Two spins have been returned to the wheel.',
-      'CLAIM +2 SPINS', finish, 'win');
-    Snd.jackpot(); fireworks(6);
-  } else {
-    showCard('STAGE CLEARED', '✔  ' + s.name,
-      (STAGES.length-stageIdx) + ' to go. Keep it together, Blue.',
-      'NEXT STAGE', startStage, 'win');
-  }
-}
-
-function stageLose(){
-  const s = STAGES[stageIdx];
-  fails[s.id] = (fails[s.id]||0) + 1;
-  Snd.buzzer(); setTimeout(function(){ Snd.sadTrombone(); }, 320);
-  shake(); flashScreen(.7,'#ff0033');
-  showCard('STAGE FAILED', '💀  ' + s.name,
-    'No penalty - you can retry as many times as you want, and every retry is easier than the last.',
-    'TRY AGAIN', runStage, 'lose');
-}
-
-function finish(){
-  activeFlag=false;
-  ov.classList.remove('on');
-  document.body.classList.remove('mg-open');
-  stopLoop();
-  if(typeof gauntletCleared === 'function') gauntletCleared();
-}
-
-function open(){
-  activeFlag=true;
-  stageIdx=0; fails={};
-  ov.classList.add('on');
-  document.body.classList.add('mg-open');
-  fit();
-  showCard('THE COMEBACK GAUNTLET', '5 GAMES · 2 SPINS ON THE LINE',
-    'You lost everything on the wheel. This is the only way back.\n' +
-    'Beat all five games and you win 2 spins - and those spins are guaranteed real prizes.\n' +
-    'Unlimited retries. Every retry gets easier. You cannot get stuck.',
-    'LET US GO', startStage, 'intro');
-  Snd.riser(2.2);
-}
-
-return { open:open, active:function(){ return activeFlag; } };
-})();
-
 </script>
 </body>
 </html>
