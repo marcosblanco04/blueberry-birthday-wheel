@@ -198,19 +198,59 @@ function evSlots(){
 
 const EVENTS = [evUpsideDown, evDisco, evSeaLions, evFakeCrash, evBerryRain,
                 evGravity, evAngryWheel, evTinyWheel, evChat, evDelivery, evSlots];
-let bag = [];
 
-function fire(){
+/* events that must never run while a mini game is on screen
+   (they move or rotate things the games are drawn inside) */
+const UNSAFE_IN_GAUNTLET = [evUpsideDown, evAngryWheel, evTinyWheel];
+
+/* a shuffled queue, not a dice roll - she gets every single one */
+let queue = [], lap = 0;
+function reshuffle(){
+  queue = EVENTS.slice();
+  for(let i=queue.length-1;i>0;i--){
+    const j=(Math.random()*(i+1))|0, t=queue[i]; queue[i]=queue[j]; queue[j]=t;
+  }
+  lap++;
+}
+reshuffle();
+
+function inGauntlet(){
+  return typeof MG !== 'undefined' && MG.active && MG.active();
+}
+
+function next(){
   if(busy) return false;
-  if(typeof MG !== 'undefined' && MG.active()) return false;
   if(!Snd.ctx) return false;
-  if(!bag.length){ bag = EVENTS.slice(); }
-  const i = (Math.random()*bag.length)|0;
-  const ev = bag.splice(i,1)[0];
+  if(typeof MG !== 'undefined' && MG.inGame && MG.inGame()) return false;  /* never mid-game */
+  if(!queue.length) reshuffle();
+
+  /* pick the first queued event that is safe right now */
+  let idx = 0;
+  if(inGauntlet()){
+    idx = -1;
+    for(let i=0;i<queue.length;i++){
+      if(UNSAFE_IN_GAUNTLET.indexOf(queue[i]) < 0){ idx = i; break; }
+    }
+    if(idx < 0) return false;         /* only unsafe ones left - wait for the wheel */
+  }
+  const ev = queue.splice(idx,1)[0];
   busy = true;
   try { ev(); } catch(e){ console.error('surprise failed', e); end(); }
   return true;
 }
+const fire = next;
+
+/* fire everything still unseen, one after another */
+function flush(){
+  if(!queue.length) return;
+  (function step(){
+    if(!queue.length) return;
+    if(busy){ setTimeout(step, 700); return; }
+    if(!next()){ setTimeout(step, 700); return; }
+    setTimeout(step, 1400);
+  })();
+}
+function remaining(){ return queue.length; }
 
 /* ---------- DOUBLE OR NOTHING (operator troll, key V) ---------- */
 function doubleOrNothing(){
@@ -250,15 +290,20 @@ function doubleOrNothing(){
 }
 
 /* ---------- auto scheduler ---------- */
+const OK_STATES = ['ready','awaitGift','failed','lost','gauntlet'];
 function tick(){
   const now = performance.now();
-  if(!nextAt){ nextAt = now + 55000 + Math.random()*45000; return; }
+  if(!nextAt){ nextAt = now + 22000; return; }
   if(now < nextAt) return;
-  const ok = (typeof state !== 'undefined') && state === 'ready';
-  if(ok && fire()) nextAt = now + 60000 + Math.random()*60000;
-  else nextAt = now + 8000;
+  const ok = (typeof state !== 'undefined') && OK_STATES.indexOf(state) >= 0;
+  if(ok && next()) nextAt = now + 34000 + Math.random()*22000;
+  else nextAt = now + 5000;
 }
 setInterval(tick, 1000);
 
-return { fire:fire, doubleOrNothing:doubleOrNothing, busy:function(){ return busy; } };
+return {
+  fire:fire, next:next, flush:flush, remaining:remaining,
+  doubleOrNothing:doubleOrNothing,
+  busy:function(){ return busy; }
+};
 })();

@@ -524,7 +524,7 @@ kbd{background:#2b1055;border:1px solid #5b2fa8;border-bottom-width:3px;border-r
   <kbd>1</kbd> Headband &nbsp; <kbd>2</kbd> Wig &nbsp; <kbd>3</kbd> Horns &nbsp; <kbd>4</kbd> Dispatch &nbsp; <kbd>5</kbd> Celsius<br>
   <kbd>0</kbd> force FAILED &nbsp; <kbd>G</kbd> skip gauntlet &nbsp; <kbd>R</kbd> full reset &nbsp; <kbd>M</kbd> mute<br>
   <kbd>F</kbd> fullscreen &nbsp; <kbd>C</kbd> confetti test &nbsp; <kbd>H</kbd> hide this<br>
-  <kbd>X</kbd> random surprise &nbsp; <kbd>V</kbd> double-or-nothing troll &nbsp;
+  <kbd>X</kbd> next surprise (<b id="surLeft">11</b> left) &nbsp; <kbd>V</kbd> double-or-nothing &nbsp;
   <kbd>B</kbd> fake-out: auto/always/never<br>
   <span style="opacity:.6;font-size:11.5px">Flow: spin 1 FAIL &rarr; spin 2 FAIL &rarr; YOU LOST EVERYTHING
   &rarr; 5-game gauntlet (~10 min, unlimited retries, always winnable) &rarr; +2 spins,
@@ -1446,6 +1446,7 @@ function armNext(){
   updCounter();
   state='ready'; hub.disabled=false; hub.classList.remove('waiting');
   hub.classList.add('ready'); hub.textContent='SPIN';
+  setTimeout(function(){ try{ SUR.next(); }catch(e){} }, 1600);
 }
 
 /* ---------- rock bottom ---------- */
@@ -1499,6 +1500,7 @@ function showFinale(){
   Snd.fanfare(); Snd.jackpot(); Snd.yippee();
   setTimeout(function(){ Snd.yippee(); },2200);
   cannons(); rainConfetti(160); fireworks(8);
+  setTimeout(function(){ try{ SUR.flush(); }catch(e){} }, 6000);
   setTimeout(function(){ if(state==='done') document.getElementById('sumOv').classList.add('on'); },500);
 }
 
@@ -1595,7 +1597,11 @@ addEventListener('keydown', function(e){
   if(k==='v'){ SUR.doubleOrNothing(); }
   if(k==='b'){ fakeOutForced = (fakeOutForced===null) ? true : (fakeOutForced===true ? false : null); }
   if(k==='m'){ Snd.muted=!Snd.muted; }
-  if(k==='h') document.getElementById('help').classList.toggle('on');
+  if(k==='h'){
+    const hp=document.getElementById('help');
+    hp.classList.toggle('on');
+    try{ document.getElementById('surLeft').textContent = SUR.remaining(); }catch(e){}
+  }
   if(k==='r') location.reload();
   if(k==='f'){ if(document.fullscreenElement) document.exitFullscreen(); else document.documentElement.requestFullscreen(); }
 });

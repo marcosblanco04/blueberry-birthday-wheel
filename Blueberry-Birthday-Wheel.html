@@ -524,7 +524,7 @@ kbd{background:#2b1055;border:1px solid #5b2fa8;border-bottom-width:3px;border-r
   <kbd>1</kbd> Headband &nbsp; <kbd>2</kbd> Wig &nbsp; <kbd>3</kbd> Horns &nbsp; <kbd>4</kbd> Dispatch &nbsp; <kbd>5</kbd> Celsius<br>
   <kbd>0</kbd> force FAILED &nbsp; <kbd>G</kbd> skip gauntlet &nbsp; <kbd>R</kbd> full reset &nbsp; <kbd>M</kbd> mute<br>
   <kbd>F</kbd> fullscreen &nbsp; <kbd>C</kbd> confetti test &nbsp; <kbd>H</kbd> hide this<br>
-  <kbd>X</kbd> random surprise &nbsp; <kbd>V</kbd> double-or-nothing troll &nbsp;
+  <kbd>X</kbd> next surprise (<b id="surLeft">11</b> left) &nbsp; <kbd>V</kbd> double-or-nothing &nbsp;
   <kbd>B</kbd> fake-out: auto/always/never<br>
   <span style="opacity:.6;font-size:11.5px">Flow: spin 1 FAIL &rarr; spin 2 FAIL &rarr; YOU LOST EVERYTHING
   &rarr; 5-game gauntlet (~10 min, unlimited retries, always winnable) &rarr; +2 spins,
@@ -1446,6 +1446,7 @@ function armNext(){
   updCounter();
   state='ready'; hub.disabled=false; hub.classList.remove('waiting');
   hub.classList.add('ready'); hub.textContent='SPIN';
+  setTimeout(function(){ try{ SUR.next(); }catch(e){} }, 1600);
 }
 
 /* ---------- rock bottom ---------- */
@@ -1499,6 +1500,7 @@ function showFinale(){
   Snd.fanfare(); Snd.jackpot(); Snd.yippee();
   setTimeout(function(){ Snd.yippee(); },2200);
   cannons(); rainConfetti(160); fireworks(8);
+  setTimeout(function(){ try{ SUR.flush(); }catch(e){} }, 6000);
   setTimeout(function(){ if(state==='done') document.getElementById('sumOv').classList.add('on'); },500);
 }
 
@@ -1595,7 +1597,11 @@ addEventListener('keydown', function(e){
   if(k==='v'){ SUR.doubleOrNothing(); }
   if(k==='b'){ fakeOutForced = (fakeOutForced===null) ? true : (fakeOutForced===true ? false : null); }
   if(k==='m'){ Snd.muted=!Snd.muted; }
-  if(k==='h') document.getElementById('help').classList.toggle('on');
+  if(k==='h'){
+    const hp=document.getElementById('help');
+    hp.classList.toggle('on');
+    try{ document.getElementById('surLeft').textContent = SUR.remaining(); }catch(e){}
+  }
   if(k==='r') location.reload();
   if(k==='f'){ if(document.fullscreenElement) document.exitFullscreen(); else document.documentElement.requestFullscreen(); }
 });
@@ -2199,6 +2205,7 @@ function startStage(){
   renderPills();
   const s = STAGES[stageIdx];
   const f = fails[s.id]||0;
+  setTimeout(function(){ try{ SUR.next(); }catch(e){} }, 900);
   showCard(
     'STAGE ' + (stageIdx+1) + ' / ' + STAGES.length,
     s.icon + '  ' + s.name,
@@ -2209,6 +2216,8 @@ function startStage(){
 
 function runStage(){
   const s = STAGES[stageIdx];
+  document.body.classList.remove('sur-flip','sur-disco');
+  try{ GRAV_MUL = 1; }catch(e){}
   hideCard(); fit();
   const env = {
     mercy: fails[s.id]||0,
@@ -2234,6 +2243,7 @@ function stageWin(){
       'CLAIM +2 SPINS', finish, 'win');
     Snd.jackpot(); fireworks(6);
   } else {
+    setTimeout(function(){ try{ SUR.next(); }catch(e){} }, 1400);
     showCard('STAGE CLEARED', '✔  ' + s.name,
       (STAGES.length-stageIdx) + ' to go. Keep it together, Blue.',
       'NEXT STAGE', startStage, 'win');
@@ -2278,6 +2288,7 @@ function open(){
 return {
   open:open,
   active:function(){ return activeFlag; },
+  inGame:function(){ return running; },
   /* operator escape hatches */
   goto:function(i){ stopLoop(); stageIdx=Math.max(0,Math.min(STAGES.length-1,i)); startStage(); },
   skip:function(){ if(!activeFlag) return; stopLoop(); stageWin(); }
@@ -2484,19 +2495,59 @@ function evSlots(){
 
 const EVENTS = [evUpsideDown, evDisco, evSeaLions, evFakeCrash, evBerryRain,
                 evGravity, evAngryWheel, evTinyWheel, evChat, evDelivery, evSlots];
-let bag = [];
 
-function fire(){
+/* events that must never run while a mini game is on screen
+   (they move or rotate things the games are drawn inside) */
+const UNSAFE_IN_GAUNTLET = [evUpsideDown, evAngryWheel, evTinyWheel];
+
+/* a shuffled queue, not a dice roll - she gets every single one */
+let queue = [], lap = 0;
+function reshuffle(){
+  queue = EVENTS.slice();
+  for(let i=queue.length-1;i>0;i--){
+    const j=(Math.random()*(i+1))|0, t=queue[i]; queue[i]=queue[j]; queue[j]=t;
+  }
+  lap++;
+}
+reshuffle();
+
+function inGauntlet(){
+  return typeof MG !== 'undefined' && MG.active && MG.active();
+}
+
+function next(){
   if(busy) return false;
-  if(typeof MG !== 'undefined' && MG.active()) return false;
   if(!Snd.ctx) return false;
-  if(!bag.length){ bag = EVENTS.slice(); }
-  const i = (Math.random()*bag.length)|0;
-  const ev = bag.splice(i,1)[0];
+  if(typeof MG !== 'undefined' && MG.inGame && MG.inGame()) return false;  /* never mid-game */
+  if(!queue.length) reshuffle();
+
+  /* pick the first queued event that is safe right now */
+  let idx = 0;
+  if(inGauntlet()){
+    idx = -1;
+    for(let i=0;i<queue.length;i++){
+      if(UNSAFE_IN_GAUNTLET.indexOf(queue[i]) < 0){ idx = i; break; }
+    }
+    if(idx < 0) return false;         /* only unsafe ones left - wait for the wheel */
+  }
+  const ev = queue.splice(idx,1)[0];
   busy = true;
   try { ev(); } catch(e){ console.error('surprise failed', e); end(); }
   return true;
 }
+const fire = next;
+
+/* fire everything still unseen, one after another */
+function flush(){
+  if(!queue.length) return;
+  (function step(){
+    if(!queue.length) return;
+    if(busy){ setTimeout(step, 700); return; }
+    if(!next()){ setTimeout(step, 700); return; }
+    setTimeout(step, 1400);
+  })();
+}
+function remaining(){ return queue.length; }
 
 /* ---------- DOUBLE OR NOTHING (operator troll, key V) ---------- */
 function doubleOrNothing(){
@@ -2536,17 +2587,22 @@ function doubleOrNothing(){
 }
 
 /* ---------- auto scheduler ---------- */
+const OK_STATES = ['ready','awaitGift','failed','lost','gauntlet'];
 function tick(){
   const now = performance.now();
-  if(!nextAt){ nextAt = now + 55000 + Math.random()*45000; return; }
+  if(!nextAt){ nextAt = now + 22000; return; }
   if(now < nextAt) return;
-  const ok = (typeof state !== 'undefined') && state === 'ready';
-  if(ok && fire()) nextAt = now + 60000 + Math.random()*60000;
-  else nextAt = now + 8000;
+  const ok = (typeof state !== 'undefined') && OK_STATES.indexOf(state) >= 0;
+  if(ok && next()) nextAt = now + 34000 + Math.random()*22000;
+  else nextAt = now + 5000;
 }
 setInterval(tick, 1000);
 
-return { fire:fire, doubleOrNothing:doubleOrNothing, busy:function(){ return busy; } };
+return {
+  fire:fire, next:next, flush:flush, remaining:remaining,
+  doubleOrNothing:doubleOrNothing,
+  busy:function(){ return busy; }
+};
 })();
 
 </script>

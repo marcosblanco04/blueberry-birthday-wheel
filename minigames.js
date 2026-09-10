@@ -596,6 +596,7 @@ function startStage(){
   renderPills();
   const s = STAGES[stageIdx];
   const f = fails[s.id]||0;
+  setTimeout(function(){ try{ SUR.next(); }catch(e){} }, 900);
   showCard(
     'STAGE ' + (stageIdx+1) + ' / ' + STAGES.length,
     s.icon + '  ' + s.name,
@@ -606,6 +607,8 @@ function startStage(){
 
 function runStage(){
   const s = STAGES[stageIdx];
+  document.body.classList.remove('sur-flip','sur-disco');
+  try{ GRAV_MUL = 1; }catch(e){}
   hideCard(); fit();
   const env = {
     mercy: fails[s.id]||0,
@@ -631,6 +634,7 @@ function stageWin(){
       'CLAIM +2 SPINS', finish, 'win');
     Snd.jackpot(); fireworks(6);
   } else {
+    setTimeout(function(){ try{ SUR.next(); }catch(e){} }, 1400);
     showCard('STAGE CLEARED', '✔  ' + s.name,
       (STAGES.length-stageIdx) + ' to go. Keep it together, Blue.',
       'NEXT STAGE', startStage, 'win');
@@ -675,6 +679,7 @@ function open(){
 return {
   open:open,
   active:function(){ return activeFlag; },
+  inGame:function(){ return running; },
   /* operator escape hatches */
   goto:function(i){ stopLoop(); stageIdx=Math.max(0,Math.min(STAGES.length-1,i)); startStage(); },
   skip:function(){ if(!activeFlag) return; stopLoop(); stageWin(); }
