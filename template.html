@@ -1393,6 +1393,9 @@ const BIG_LOOKING = ['monitor','ps5','neon','hexa','pyramid','nurse','leon','ten
 const FAKEOUT_CHANCE = .55;
 let fakeOutForced = null;          /* null = auto, true = always, false = never */
 
+function isOwned(it){
+  return !!it && (it.alreadyWon || WON.indexOf(it.k) >= 0);
+}
 function pickDecoy(targetIdx){
   if(fakeOutForced === false) return null;
   const lastLoss  = (phase==='losses'   && spinsTaken === LOSS_SPINS-1);
@@ -1401,20 +1404,22 @@ function pickDecoy(targetIdx){
   const force = (fakeOutForced === true) || lastLoss || lastPrize || secret;
   if(!force && Math.random() > FAKEOUT_CHANCE) return null;
 
-  let pick = null;
-  [2,3,4].forEach(function(k){
-    const i = (targetIdx + k) % N, it = ITEMS[i];
-    if(it.fail || it.secret || it.alreadyWon) return;
-    if(!pick) pick = {idx:i, item:it};
-    else if(BIG_LOOKING.indexOf(it.k) >= 0 && BIG_LOOKING.indexOf(pick.item.k) < 0) pick = {idx:i, item:it};
-  });
+  /* only slices she already owns - closest one that is at least 2 slices away */
+  let pick = null, bestK = 99;
+  for(let i=0;i<N;i++){
+    const it = ITEMS[i];
+    if(!isOwned(it) || i === targetIdx) continue;
+    const k = ((i - targetIdx) % N + N) % N;
+    if(k < 2) continue;
+    if(k < bestK){ bestK = k; pick = {idx:i, item:it, k:k}; }
+  }
   return pick;
 }
 
 function fakeCelebrate(item, done){
   if(FF){ done(); return; }
   const box = document.getElementById('fakeWin');
-  document.getElementById('fakeWinName').textContent = item.n;
+  document.getElementById('fakeWinName').textContent = item.n + '  (you already have this one)';
   document.getElementById('fakeWinImg').src = A[item.k] || '';
   box.classList.remove('wait'); box.classList.add('on');
   winMode = true;
@@ -1453,7 +1458,8 @@ function spin(){
           function(){
     if(!decoy){ land(item); return; }
     fakeCelebrate(decoy.item, function(){
-      runSpin(targetIdx, {dur:3200, holdAt:1, holdMs:0, turns:0, jitter:.3, pow:3.6},
+      const creep = Math.min(4200, 1700 + (decoy.k || 3)*230);
+      runSpin(targetIdx, {dur:creep, holdAt:1, holdMs:0, turns:0, jitter:.3, pow:3.6},
               function(){ land(item); });
     });
   });
