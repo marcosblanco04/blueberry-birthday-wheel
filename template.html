@@ -695,11 +695,12 @@ kbd{background:#2b1055;border:1px solid #5b2fa8;border-bottom-width:3px;border-r
   <h3>OPERATOR CONTROLS</h3>
   <kbd>SPACE</kbd> spin &nbsp; <kbd>ENTER</kbd> confirm gift bought<br>
   <kbd>1</kbd> Headband &nbsp; <kbd>2</kbd> Wig &nbsp; <kbd>3</kbd> Horns &nbsp; <kbd>4</kbd> Dispatch &nbsp; <kbd>5</kbd> Celsius<br>
-  <kbd>0</kbd> force FAILED &nbsp; <kbd>G</kbd> skip gauntlet &nbsp; <kbd>R</kbd> full reset &nbsp; <kbd>M</kbd> mute<br>
+  <kbd>9</kbd> force FAILED &nbsp; <kbd>G</kbd> skip gauntlet &nbsp; <kbd>R</kbd> full reset &nbsp; <kbd>M</kbd> mute<br>
   <kbd>F</kbd> fullscreen &nbsp; <kbd>C</kbd> confetti test &nbsp; <kbd>H</kbd> hide this<br>
   <kbd>X</kbd> next surprise (<b id="surLeft">11</b> left) &nbsp; <kbd>V</kbd> double-or-nothing &nbsp;
   <kbd>B</kbd> fake-out: auto/always/never<br>
-  <kbd>&sect;</kbd> or <kbd>`</kbd> ADMIN PANEL (jump anywhere, no replaying)<br>
+  <kbd>&sect;</kbd> or <kbd>`</kbd> ADMIN PANEL &nbsp;&nbsp;
+  <kbd>0</kbd> FAST-FORWARD &mdash; skips whatever is on screen<br>
   <span style="opacity:.6;font-size:11.5px">Flow: FAIL &rarr; FAIL &rarr; YOU LOST EVERYTHING &rarr; 5-game
   gauntlet &rarr; +2 spins (random prize each) &rarr; DOUBLE OR NOTHING (the NO button runs away)
   &rarr; she hits the 5% &rarr; +2 spins: the last prize, then the SECRET PRIZE
@@ -1316,6 +1317,7 @@ sizeCanvases(); requestAnimationFrame(loop);
    ============================================================ */
 const hub=document.getElementById('hub'), counter=document.getElementById('counter');
 const pointerEl=document.getElementById('pointer'), wrap=document.getElementById('wheelWrap');
+let FF = false;   /* fast-forward: set by the hidden 0 key */
 let spinsTaken=0, spinsAllowed=LOSS_SPINS, comebackBase=LOSS_SPINS, phase='losses', override=null, state='ready';
 /* phase: losses -> gauntlet -> comeback -> done
    state: ready | spinning | awaitGift | failed | bonus | lost | done */
@@ -1354,6 +1356,7 @@ function runSpin(targetIdx, opts, done){
   let tensionDone = false;
 
   function frame(now){
+    if(FF){ rot = from + dist; done(); return; }
     const e = now - t0;
     let p;
     if(HOLD_MS > 0){
@@ -1409,6 +1412,7 @@ function pickDecoy(targetIdx){
 }
 
 function fakeCelebrate(item, done){
+  if(FF){ done(); return; }
   const box = document.getElementById('fakeWin');
   document.getElementById('fakeWinName').textContent = item.n;
   document.getElementById('fakeWinImg').src = A[item.k] || '';
@@ -1456,6 +1460,7 @@ function spin(){
 }
 
 function land(item){
+  FF = false;
   spinning=false; wrap.classList.remove('zoom');
   Snd.clack(1.6);
   if(item.fail) doFail();
@@ -1764,6 +1769,35 @@ function failAcknowledged(){
   armNext();
 }
 
+/* ------------------------------------------------------------
+   HIDDEN FAST-FORWARD (key 0) - one button that advances whatever
+   is on screen, so the whole show can be tested in a minute.
+   ------------------------------------------------------------ */
+function fastForward(){
+  try{
+    if(MG.active()){
+      if(MG.inGame()){ MG.skip(); return; }
+      const card = document.getElementById('mgCard');
+      if(card && card.style.display !== 'none'){ document.getElementById('mgCardBtn').click(); }
+      return;
+    }
+    if(!started){ begin(); return; }
+    switch(state){
+      case 'ready':         spin(); return;
+      case 'spinning':      FF = true; return;
+      case 'awaitGift':     giftConfirmed(); return;
+      case 'failed':        failAcknowledged(); return;
+      case 'lost':          enterGauntlet(); return;
+      case 'bonus':         extraAcknowledged(); return;
+      case 'don':           donAccept(); return;
+      case 'donRoll':       rollNeedle = greenPos; donStop(); return;
+      case 'celsiusIntro':  document.getElementById('celsiusBtn').click(); return;
+      case 'mash':          mashPower = 999; return;
+      default: return;
+    }
+  }catch(e){ console.error('fast-forward', e); }
+}
+
 /* ============================================================
    7. WIRING
    ============================================================ */
@@ -1821,6 +1855,7 @@ addEventListener('keydown', function(e){
     if(e.key === 'Escape'){ ADMIN.close(); }
     return;
   }
+  if(e.key === '0'){ e.preventDefault(); fastForward(); return; }
   if(MG.active()) return;
   if(state === 'don' || state === 'donRoll' || state === 'mash') return;
   const k=e.key.toLowerCase();
@@ -1848,7 +1883,7 @@ addEventListener('keydown', function(e){
   if(k==='4') override='dispatch';
   if(k==='5') override='celsius24';
   if(k==='g'){ phase='comeback'; comebackBase=spinsTaken; spinsAllowed=spinsTaken+PRIZE_SPINS; state='ready'; hub.disabled=false; hub.classList.add('ready'); hub.textContent='SPIN'; updCounter(); }
-  if(k==='0') override='FAIL';
+  if(k==='9') override='FAIL';
   if(k==='c'){ cannons(); rainConfetti(120); fireworks(3); }
   if(k==='x'){ SUR.fire(); }
   if(k==='v'){ startDoubleOrNothing(); }

@@ -376,6 +376,7 @@ const ADMIN = (function(){
       startSecretCountdown();
       document.getElementById('sumOv').classList.add('on');
     });
+    btn(r, 'Fast-forward (key 0)', function(){ closePanel(); fastForward(); });
     btn(r, 'Mute / unmute', function(){ Snd.muted = !Snd.muted; });
     btn(r, 'Confetti', function(){ cannons(); rainConfetti(160); fireworks(3); });
     btn(r, 'Close panel', closePanel);
